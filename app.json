@@ -1,0 +1,6 @@
+{
+    "name": "WHOOP",
+    "description": "Final Project Group Event Messagign App",
+    "repository": "git@github.com:winnie-ho/170223_final_project.git" ,
+    "keywords": "["node", "express", "static"]",
+}
