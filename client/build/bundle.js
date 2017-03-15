@@ -2404,7 +2404,7 @@ var dbHandler = function dbHandler() {};
 
 dbHandler.prototype = {
   callDB: function callDB(urlSpec, word, callback, dataToSend) {
-    var url = "http://localhost:5000/" + urlSpec;
+    var url = "https://whooprails.herokuapp.com/" + urlSpec;
     var request = new XMLHttpRequest();
     request.open(word, url);
     request.setRequestHeader("content-type", "application/json");
@@ -13600,7 +13600,7 @@ var Home = function (_React$Component) {
       var _this2 = this;
 
       var request = new XMLHttpRequest();
-      request.open("GET", "http://localhost:5000/users/1.json");
+      request.open("GET", "https://whooprails.herokuapp.com/users/1.json");
       request.setRequestHeader("content-type", "application/json");
       request.withCredentials = true;
       request.onload = function () {
@@ -13646,7 +13646,7 @@ var Home = function (_React$Component) {
           null,
           "LOGIN"
         ),
-        _react2.default.createElement(_SignIn2.default, { url: "http://localhost:5000/users/sign_in.json", onSignIn: this.setUser }),
+        _react2.default.createElement(_SignIn2.default, { url: "https://whooprails.herokuapp.com/users/sign_in.json", onSignIn: this.setUser }),
         _react2.default.createElement(
           "div",
           { className: "link-hover", onClick: this.createAccount },
@@ -13673,7 +13673,7 @@ var Home = function (_React$Component) {
             null,
             "SIGN UP"
           ),
-          _react2.default.createElement(_SignUp2.default, { url: "http://localhost:5000/users.json", create: this.state.createAccount, onSignUp: this.setUser }),
+          _react2.default.createElement(_SignUp2.default, { url: "https://whooprails.herokuapp.com/users.json", create: this.state.createAccount, onSignUp: this.setUser }),
           _react2.default.createElement(
             "div",
             { className: "link-hover", onClick: this.goBack },
@@ -13736,7 +13736,7 @@ var Home = function (_React$Component) {
         signOutDiv = _react2.default.createElement(
           "div",
           null,
-          _react2.default.createElement(_SignOut2.default, { url: "http://localhost:5000/users/sign_out.json", onSignOut: this.setUser })
+          _react2.default.createElement(_SignOut2.default, { url: "https://whooprails.herokuapp.com/users/sign_out.json", onSignOut: this.setUser })
         );
         createAccDiv = _react2.default.createElement("div", null);
       }

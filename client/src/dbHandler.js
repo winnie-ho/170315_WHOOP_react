@@ -4,7 +4,7 @@ var dbHandler = function(){
 
 dbHandler.prototype = {
 	callDB: function(urlSpec, word, callback, dataToSend){
-	var url = "http://localhost:5000/" + urlSpec;
+	var url = "https://whooprails.herokuapp.com/" + urlSpec;
   var request = new XMLHttpRequest();
   request.open(word, url);
   request.setRequestHeader("content-type", "application/json");

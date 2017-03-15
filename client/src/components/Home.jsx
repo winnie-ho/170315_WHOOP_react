@@ -26,7 +26,7 @@ class Home extends React.Component {
 
   getUser(){
     const request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:5000/users/1.json");
+    request.open("GET", "https://whooprails.herokuapp.com/users/1.json");
     request.setRequestHeader("content-type", "application/json");
     request.withCredentials = true;
     request.onload = () => {
@@ -62,7 +62,7 @@ class Home extends React.Component {
   {/*initial state render - sign in*/}
   var mainDiv = <div className = "sign-in" >
     <h4>LOGIN</h4>
-    <SignIn url="http://localhost:5000/users/sign_in.json" onSignIn={this.setUser}></SignIn>
+    <SignIn url="https://whooprails.herokuapp.com/users/sign_in.json" onSignIn={this.setUser}></SignIn>
     <div className = "link-hover" onClick = {this.createAccount}>
       <p>create account</p>
     </div>
@@ -73,7 +73,7 @@ class Home extends React.Component {
   if(this.state.createAccount === true){
     var createAccDiv = <div className = "create-account"> 
       <h4>SIGN UP</h4>
-      <SignUp url="http://localhost:5000/users.json" create = {this.state.createAccount} onSignUp={this.setUser}></SignUp>
+      <SignUp url="https://whooprails.herokuapp.com/users.json" create = {this.state.createAccount} onSignUp={this.setUser}></SignUp>
       <div className = "link-hover" onClick = {this.goBack}>
         <p> ← sign in </p>
       </div>
@@ -96,7 +96,7 @@ if(this.state.currentUser){
   </div>
 
   signOutDiv = <div>
-    <SignOut url="http://localhost:5000/users/sign_out.json" onSignOut={this.setUser}></SignOut>
+    <SignOut url="https://whooprails.herokuapp.com/users/sign_out.json" onSignOut={this.setUser}></SignOut>
   </div>
   createAccDiv = <div></div>
 }
