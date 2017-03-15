@@ -309,7 +309,7 @@ class EventView extends React.Component{
 
             </div>
             <div onClick = {this.jumpRight} className = "location-arrow">▷ </div>
-             <div onClick = {this.jumpLeft} className = "location-arrow">◀︎ </div>
+            <div onClick = {this.jumpLeft} className = "location-arrow">◀︎ </div>
 
 
             <MapView setRunLine = {this.setRunLine} />

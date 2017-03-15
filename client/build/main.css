@@ -699,9 +699,13 @@ form{
 
 .strava-div{
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .strava-div > select {
-  width: 400px;
+  margin-left: 5px;
+  width: 40vw;
 } 

@@ -50,12 +50,15 @@ class StravaHook extends React.Component{
     })
 
     return(
+      <div>
+        ADD RUN ROUTE
       <div className = "strava-div">
         <select defaultValue = "select" onChange = {this.handleSelectorChange}>
         <option disabled = "true">select</option>
         {runOptions}
         </select>
         <button onClick = {this.props.plotRoute}>ADD</button>
+      </div>
       </div>
     )
   }

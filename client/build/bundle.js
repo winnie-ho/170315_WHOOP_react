@@ -29724,21 +29724,26 @@ var StravaHook = function (_React$Component) {
 
       return _react2.default.createElement(
         "div",
-        { className: "strava-div" },
+        null,
+        "ADD RUN ROUTE",
         _react2.default.createElement(
-          "select",
-          { defaultValue: "select", onChange: this.handleSelectorChange },
+          "div",
+          { className: "strava-div" },
           _react2.default.createElement(
-            "option",
-            { disabled: "true" },
-            "select"
+            "select",
+            { defaultValue: "select", onChange: this.handleSelectorChange },
+            _react2.default.createElement(
+              "option",
+              { disabled: "true" },
+              "select"
+            ),
+            runOptions
           ),
-          runOptions
-        ),
-        _react2.default.createElement(
-          "button",
-          { onClick: this.props.plotRoute },
-          "ADD"
+          _react2.default.createElement(
+            "button",
+            { onClick: this.props.plotRoute },
+            "ADD"
+          )
         )
       );
     }

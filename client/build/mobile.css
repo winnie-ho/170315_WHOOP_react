@@ -363,7 +363,7 @@ form{
 
 .top-bar{
   margin-top: 0px;
-  width: 90vw;
+  width: 80vw;
   display: flex;
   flex-direction: row;
   /*border: dashed blue 1px;*/
@@ -665,15 +665,19 @@ form{
   justify-content: flex-start;
 }
 
+.event-form-input{
+  width: 60vw;
+}
+
 .event-view-div{
-  height: 96vh;
-  width: 100vw;
-  margin-top: 0px;
+  height: 92vh;
+  width: 85vw;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  /*border: black dashed 1px;*/
+  border: black dashed 1px;
 }
 
 .event-div{
@@ -684,29 +688,29 @@ form{
   align-items: center;
   margin:5px;
   padding: 0px;
-  /*border: dashed 1px green;*/
-  width: 85vw;
-  height: 90vh;
+  border: dashed 1px green;
+  width: 76vw;
+  height: 80vh;
   overflow-y: hidden;
   overflow-x: scroll;
 }
 
 
 .event-details{
-  /*border: dashed 1px red;*/
+  border: dashed 1px red;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-content: flex-start;
   align-items: flex-start;
-  width: 75vw;
+  width: 66vw;
   height: 80vh;
   margin: 5px;
   padding: 3px;
 }
 
 .event-specs{
-  width: 80vw;
+  width: 75vw;
   margin: 5px;
 }
 
@@ -716,13 +720,14 @@ form{
   align-content: center;
   align-items: center;
   justify-content: space-between;
-  margin: 1px;
+  margin: 0px;
   padding: 0px;
+  visibility: visible;
 }
 .map-side{
   margin:2px;
   /*border: dashed 1px green;*/
-  width: 79vw;
+  width: 70vw;
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -730,7 +735,7 @@ form{
 }
 
 .main-map{
-  width: 80vw;
+  width: 70vw;
   height: 90vh;
 }
 .attendance-control{
@@ -760,6 +765,7 @@ form{
 
 .strava-div{
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-content: center;
   align-items: center;
@@ -767,6 +773,6 @@ form{
 
 .strava-div > select {
   margin-left: 5px;
-  width: 60vw;
+  width: 50vw;
   border: gray 1px solid;
 } 
