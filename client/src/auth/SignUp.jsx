@@ -65,7 +65,7 @@ class SignUp extends React.Component {
         <input type="password" onChange={this.handleOnChangePassword}  placeholder="password" />
         <input type="password" onChange={this.handleOnChangePassConf}  placeholder="password confirmation" />
 
-        <button onClick={this.signUp}>  SIGN UP </button>
+        <button onClick={this.signUp}>SIGN UP</button>
       </form>
     )
   }

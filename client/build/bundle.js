@@ -8513,7 +8513,7 @@ var SignUp = function (_React$Component) {
         _react2.default.createElement(
           "button",
           { onClick: this.signUp },
-          "  SIGN UP "
+          "SIGN UP"
         )
       );
     }
