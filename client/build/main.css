@@ -1,3 +1,8 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(GeosansLigt.ttf);
+}
+
 body{
   font-family: GeoSansLight;
   display: flex;

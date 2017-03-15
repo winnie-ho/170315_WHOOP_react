@@ -1,3 +1,8 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(GeosansLigt.ttf);
+}
+
 #app{
   width: 100vw;
   height: 100vh;
