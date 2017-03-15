@@ -14255,7 +14255,7 @@ var GroupsListing = function (_React$Component) {
 
       return _react2.default.createElement(
         "div",
-        null,
+        { className: "groups-listing-div" },
         _react2.default.createElement(
           "nav",
           null,
@@ -14308,7 +14308,7 @@ var GroupsListing = function (_React$Component) {
             { className: "new-group", onClick: this.props.handleNewGroup },
             newGroupForm
           ),
-          _react2.default.createElement("div", { className: "new-group" })
+          _react2.default.createElement("div", { className: "new-group-fake" })
         )
       );
     }

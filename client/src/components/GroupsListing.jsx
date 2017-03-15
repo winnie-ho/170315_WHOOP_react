@@ -41,7 +41,7 @@ class GroupsListing extends React.Component{
 
 
     return(
-      <div>
+      <div className = "groups-listing-div">
         <nav>
           <div className = "logo">
             <div>
@@ -74,7 +74,7 @@ class GroupsListing extends React.Component{
           <div className = "new-group" onClick = {this.props.handleNewGroup}>
             {newGroupForm}
           </div>
-          <div className = "new-group">
+          <div className = "new-group-fake">
           </div>
         </div>
       </div>
