@@ -6,7 +6,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Winnie Ho",
@@ -14,7 +14,6 @@
   "dependencies": {
     "express": "^4.13.4",
     "webpack": "2.2.1"
-
   },
   "devDependencies": {},
   "description": ""
