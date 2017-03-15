@@ -677,7 +677,7 @@ form{
   flex-direction: column;
   align-items: center;
   align-content: center;
-  border: black dashed 1px;
+  /*border: black dashed 1px;*/
 }
 
 .event-div{
@@ -688,7 +688,7 @@ form{
   align-items: center;
   margin:5px;
   padding: 0px;
-  border: dashed 1px green;
+  /*border: dashed 1px green;*/
   width: 76vw;
   height: 80vh;
   overflow-y: hidden;
@@ -697,7 +697,7 @@ form{
 
 
 .event-details{
-  border: dashed 1px red;
+  /*border: dashed 1px red;*/
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -760,6 +760,10 @@ form{
   width: 80vw;
   margin: 5px;
   
+}
+
+.search-box{
+  width: 70vw;
 }
 
 
