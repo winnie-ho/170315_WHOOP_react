@@ -18,12 +18,12 @@ class Home extends React.Component {
     this.state = {
       currentUser: null,
       createAccount: false,
+      data: [],
     }
   }
 
   componentDidMount(){
     this.getUser();
-    this.getData();
   }
 
   getUser(){
@@ -35,7 +35,7 @@ class Home extends React.Component {
       if(request.status === 200){
         console.log("request.responseText", request.responseText);
         const receivedUser = JSON.parse(request.responseText);
-        this.setUser(receivedUser);
+        this.setUser(receivedUser, this.getData());
       } else if (request.status === 401){
         this.setUser(null);
       }
@@ -47,6 +47,7 @@ class Home extends React.Component {
     var urlSpec = "memberships/1";
     var word = "GET";
     var callback = function(data){
+      this.setState({data: data})
       console.log("Warming up", data);
     }.bind(this);
     var DBQuery = new dbHandler();
@@ -103,7 +104,14 @@ class Home extends React.Component {
       <div className = "intro">
         <h3> Hi </h3>
         <h2> {this.state.currentUser.name}</h2>
-        <Link to = "/groups">
+        <Link to = {
+          {
+            "pathname": "/groups",
+            "state": {
+              "data": this.state.data
+            }
+          } 
+        }>
           <h3>MY GR<span className = "enter">◉</span>UPS</h3>
         </Link>
       </div>

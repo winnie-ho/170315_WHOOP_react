@@ -13386,6 +13386,7 @@ var GroupsContainer = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (GroupsContainer.__proto__ || Object.getPrototypeOf(GroupsContainer)).call(this, props));
 
+    _this.setData = _this.setData.bind(_this);
     _this.getUser = _this.getUser.bind(_this);
     _this.getGroups = _this.getGroups.bind(_this);
     _this.addGroup = _this.addGroup.bind(_this);
@@ -13395,6 +13396,7 @@ var GroupsContainer = function (_React$Component) {
     _this.setAddedGroup = _this.setAddedGroup.bind(_this);
 
     _this.state = {
+      data: [],
       groups: [],
       addedGroup: null,
       newGroup: false,
@@ -13406,10 +13408,20 @@ var GroupsContainer = function (_React$Component) {
   }
 
   _createClass(GroupsContainer, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.setData();
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getGroups();
       this.getUser();
+    }
+  }, {
+    key: "setData",
+    value: function setData() {
+      this.setState({ data: this.props.location.state.data });
     }
   }, {
     key: "getUser",
@@ -13509,6 +13521,7 @@ var GroupsContainer = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log("warm up data push", this.state.data);
       return _react2.default.createElement(
         "div",
         { className: "listing" },
@@ -13587,7 +13600,8 @@ var Home = function (_React$Component) {
 
     _this.state = {
       currentUser: null,
-      createAccount: false
+      createAccount: false,
+      data: []
     };
     return _this;
   }
@@ -13596,7 +13610,6 @@ var Home = function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getUser();
-      this.getData();
     }
   }, {
     key: "getUser",
@@ -13611,7 +13624,7 @@ var Home = function (_React$Component) {
         if (request.status === 200) {
           console.log("request.responseText", request.responseText);
           var receivedUser = JSON.parse(request.responseText);
-          _this2.setUser(receivedUser);
+          _this2.setUser(receivedUser, _this2.getData());
         } else if (request.status === 401) {
           _this2.setUser(null);
         }
@@ -13624,6 +13637,7 @@ var Home = function (_React$Component) {
       var urlSpec = "memberships/1";
       var word = "GET";
       var callback = function (data) {
+        this.setState({ data: data });
         console.log("Warming up", data);
       }.bind(this);
       var DBQuery = new _dbHandler2.default();
@@ -13734,7 +13748,12 @@ var Home = function (_React$Component) {
             ),
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: "/groups" },
+              { to: {
+                  "pathname": "/groups",
+                  "state": {
+                    "data": this.state.data
+                  }
+                } },
               _react2.default.createElement(
                 "h3",
                 null,
