@@ -25,7 +25,7 @@ class GroupsContainer extends React.Component {
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.getGroups();
     this.getUser();
   }

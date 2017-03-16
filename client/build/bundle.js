@@ -2400,6 +2400,8 @@ module.exports = warning;
 "use strict";
 
 
+var _reactRouter = __webpack_require__(11);
+
 var dbHandler = function dbHandler() {};
 
 dbHandler.prototype = {
@@ -2416,7 +2418,7 @@ dbHandler.prototype = {
         callback(data);
       } else {
         console.log("Uh oh you're not logged in!");
-        browserHistory.goBack();
+        _reactRouter.browserHistory.goBack();
       }
     };
     request.send(dataToSend);
@@ -2434,7 +2436,7 @@ dbHandler.prototype = {
         callback(data);
       } else {
         console.log("Error in obtaining API!");
-        browserHistory.goBack();
+        _reactRouter.browserHistory.goBack();
       }
     };
     request.send(dataToSend);
@@ -13404,8 +13406,8 @@ var GroupsContainer = function (_React$Component) {
   }
 
   _createClass(GroupsContainer, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       this.getGroups();
       this.getUser();
     }

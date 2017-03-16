@@ -84,22 +84,22 @@ class Home extends React.Component {
   }
 
   {/*3rd state render - enter*/}
-if(this.state.currentUser){
-  mainDiv = <div className = "sign-in">
-    <div className = "intro">
-      <h3> Hi </h3>
-      <h2> {this.state.currentUser.name}</h2>
-      <Link to = "/groups">
-        <h3>MY GR<span className = "enter">◉</span>UPS</h3>
-      </Link>
+  if(this.state.currentUser){
+    mainDiv = <div className = "sign-in">
+      <div className = "intro">
+        <h3> Hi </h3>
+        <h2> {this.state.currentUser.name}</h2>
+        <Link to = "/groups">
+          <h3>MY GR<span className = "enter">◉</span>UPS</h3>
+        </Link>
+      </div>
     </div>
-  </div>
 
-  signOutDiv = <div>
-    <SignOut url="https://whooprails.herokuapp.com/users/sign_out.json" onSignOut={this.setUser}></SignOut>
-  </div>
-  createAccDiv = <div></div>
-}
+    signOutDiv = <div>
+      <SignOut url="https://whooprails.herokuapp.com/users/sign_out.json" onSignOut={this.setUser}></SignOut>
+    </div>
+    createAccDiv = <div></div>
+  }
   
 {/*calling the render*/}
     return (

@@ -362,23 +362,24 @@ form{
 }
 
 .top-bar{
-  margin-top: 0px;
+  /*border: dashed blue 1px;*/
+  margin-top: -10px;
+  margin-bottom: 20px;
   width: 80vw;
   display: flex;
   flex-direction: row;
-  /*border: dashed blue 1px;*/
   justify-content: space-between;
   align-items: center;
 }
 
 .group-main{
+  /*border: dashed blue 1px;*/
   height: 90vh;
   width: 90vw;
   padding: 0px;
   margin: 0px;
   display: flex;
   flex-direction: row;
-  /*border: dashed blue 1px;*/
   justify-content: flex-start;
   align-content: center;
   align-items: center;
@@ -599,11 +600,10 @@ form{
   align-content: center;
 }
 .members-inner{
-/*  border: dashed 1px pink;
-*/  display: flex;
+  border: dashed 1px pink;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-
   align-items: flex-start;
   align-content: center;
   width: 90vw;
@@ -611,14 +611,14 @@ form{
 }
 
 .members-add-div{
-/*  border: red dashed 1px;
-*/  display: flex;
+  /*border: red dashed 1px;*/
+  display: flex;
   flex-direction: row;
   align-items: center;
   align-content: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   height: 30px;
-
+  width: 120px;
 }
 .new-member{
   display: flex;
