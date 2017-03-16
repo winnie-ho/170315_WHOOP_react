@@ -13386,7 +13386,6 @@ var GroupsContainer = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (GroupsContainer.__proto__ || Object.getPrototypeOf(GroupsContainer)).call(this, props));
 
-    _this.setData = _this.setData.bind(_this);
     _this.getUser = _this.getUser.bind(_this);
     _this.getGroups = _this.getGroups.bind(_this);
     _this.addGroup = _this.addGroup.bind(_this);
@@ -13396,7 +13395,6 @@ var GroupsContainer = function (_React$Component) {
     _this.setAddedGroup = _this.setAddedGroup.bind(_this);
 
     _this.state = {
-      data: [],
       groups: [],
       addedGroup: null,
       newGroup: false,
@@ -13408,20 +13406,10 @@ var GroupsContainer = function (_React$Component) {
   }
 
   _createClass(GroupsContainer, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.setData();
-    }
-  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getGroups();
       this.getUser();
-    }
-  }, {
-    key: "setData",
-    value: function setData() {
-      this.setState({ data: this.props.location.state.data });
     }
   }, {
     key: "getUser",
@@ -13521,7 +13509,6 @@ var GroupsContainer = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log("warm up data push", this.state.data);
       return _react2.default.createElement(
         "div",
         { className: "listing" },
@@ -13667,7 +13654,6 @@ var Home = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-
       {/*initial state render - sign in*/}
       var mainDiv = _react2.default.createElement(
         "div",

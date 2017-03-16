@@ -73,7 +73,6 @@ class Home extends React.Component {
   }
 
   render() {
-
   {/*initial state render - sign in*/}
   var mainDiv = <div className = "sign-in" >
     <h4>LOGIN</h4>

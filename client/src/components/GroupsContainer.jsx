@@ -7,7 +7,6 @@ class GroupsContainer extends React.Component {
 
   constructor(props) {
     super(props)
-    this.setData = this.setData.bind(this);
     this.getUser = this.getUser.bind(this);
     this.getGroups = this.getGroups.bind(this);
     this.addGroup = this.addGroup.bind(this);
@@ -17,7 +16,6 @@ class GroupsContainer extends React.Component {
     this.setAddedGroup = this.setAddedGroup.bind(this);
 
     this.state = {
-      data: [], 
       groups: [],
       addedGroup: null,
       newGroup: false,
@@ -27,17 +25,9 @@ class GroupsContainer extends React.Component {
     }
   }
 
-  componentWillMount(){
-    this.setData();  
-  }
-
   componentDidMount(){
     this.getGroups();
     this.getUser();
-  }
-
-  setData(){
-    this.setState({data: this.props.location.state.data});
   }
 
   getUser(){
@@ -129,7 +119,6 @@ class GroupsContainer extends React.Component {
   }
 
   render(){
-    console.log("warm up data push", this.state.data);
     return(
       <div className="listing">
         <GroupsListing 
