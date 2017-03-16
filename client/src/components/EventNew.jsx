@@ -91,7 +91,7 @@ class EventNew extends React.Component{
           <input type = "text" onChange = {this.handleOnChangeDate} placeholder = "date" className = "event-form-input"/>
           <input type = "text" onChange = {this.handleOnChangeTime} placeholder = "time" className = "event-form-input"/> 
           <input type = "text" onChange = {this.handleOnChangeLocation} placeholder = "location" className = "event-form-input"/> 
-          <input type = "text" onChange = {this.handleOnChangeDescription} placeholder = "description" className = "event-form-input-description"/> 
+          <textarea type = "text" onChange = {this.handleOnChangeDescription} placeholder = "description" className = "event-form-input-description"/> 
           <button onClick = {this.addEvent}>ADD</button>
         </form>
       </div>

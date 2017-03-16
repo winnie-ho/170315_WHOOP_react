@@ -368,12 +368,12 @@ form{
 }
 
 .group-main{
+  /*border: dashed red 1px;*/
   display: flex;
   flex-direction: row;
   margin: 10px;
   padding-left:100px;
   padding-right:100px;
-  /*border: dashed red 1px;*/
   justify-content: space-between;
   align-content: flex-start;
   align-items: flex-start;
@@ -415,13 +415,13 @@ form{
 }
 
 .message-div{
-  display: flex;
+  /*  border: red dashed 1px;
+*/display: flex;
   flex-direction: column;
   text-align: left;
   margin-left: 40px;
   width: 400px;
-/*  border: red dashed 1px;
-*/}
+}
 
 .fake-message-div{
   height: 50px;
@@ -431,12 +431,14 @@ form{
 }
 
 .events-board{
-  height: 450px;
+  /*border: red dashed 1px;*/
+  margin-left: 5px;
+  height: 480px;
   width: 450px;
-  padding: 30px;
+  padding-right: 30px;
+  padding-left: : 30px;
+  padding-bottom: 30px;
   border-radius: 10px;
-/*  border: red dashed 1px;
-*/  margin-left: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -444,31 +446,33 @@ form{
   background-color: #F3F3F3;
 }
 
-.event-inner-div{
-  margin:10px;
+.events-inner-div{
+  /*border: red dashed 1px;*/
+  margin:0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
   width: 350px;
-/*  border: red dashed 1px;
-*/}
+}
 .event-tools{
+/*  border: red dashed 1px;
+*/
   height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   align-content: center;
-/*  border: red dashed 1px;
-*/}
+}
 
 .add-event-plus{
   margin-top: -8px;
 }
 
 .events-scroll{
+  /*border: green dashed 1px;*/
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -476,9 +480,8 @@ form{
   align-items: center;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 400px;
+  height: 360px;
   width: 400px;
-  /*border: green dashed 1px;*/
 }
 
 .event-list{
@@ -554,8 +557,21 @@ form{
   align-items: center;
 }
 
+.event-form-input{
+  width: 300px;
+}
+
 .event-form-input-description{
+  width: 306px;
+  margin: 5px;
   height: 150px;
+  font-family: GeosansLight;
+  font-size: 14px;
+  padding-left: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  text-align: left;
+  vertical-align:text-top;
 }
 
 .members-div{

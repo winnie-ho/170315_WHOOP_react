@@ -21,7 +21,7 @@ class GroupNew extends React.Component {
       <div className = "new-group-form-div">
         <form onSubmit={this.props.addGroup} className="new-group-form">
           <input type="text" onChange={this.handleOnChangeName} placeholder="name" />
-          <button onClick={this.props.addGroup}> ADD GROUP </button>
+          <button onClick={this.props.addGroup}> ADD </button>
         </form>
       </div>
     )

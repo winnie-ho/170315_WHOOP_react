@@ -318,6 +318,18 @@ nav{
       to {background-color: white}
   }
 
+.new-group-fake{
+/*  border: red dashed 1px;
+*/  height: 37vw;
+  width: 37vw;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;  
+  font-size: 50px;
+  margin: 10px;
+}
+
 .new-group-form> input{
   width: 100px;
 }
@@ -590,8 +602,8 @@ form{
 
 
 .members-div{
-/*  border: dashed 1px red;
-*/  width: 90vw;
+  /*border: dashed 1px red;*/
+  width: 90vw;
   height: 100px;
   display: flex;
   flex-direction: row;
@@ -621,13 +633,20 @@ form{
   width: 120px;
 }
 .new-member{
+  /*border: blue dashed 1px;*/
   display: flex;
   flex-direction: row;
   height: 20px;
-  /*border: blue dashed 1px;*/
   justify-content: flex-end;
   align-items: center;
   align-content: center;
+}
+
+.add-member-form{
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .add-member-plus{
@@ -653,16 +672,23 @@ form{
 .memberNodes{
   /*border: blue 1px dashed;*/
   margin-top: -10px;
-  flex: 0 0 130px;
+  margin-right: 10px;
+  height: 40px;
+  display: inline-block;
+  white-space: nowrap; 
 }
 
 .event-form-input-description{
-  height: 150px;
-  word-wrap: inherit;
-  display: flex;
-  align-content: flex-start;
-  align-items: flex-start;
-  justify-content: flex-start;
+  width: 61vw;
+  margin: 5px;
+  height: 30vw;
+  font-family: GeosansLight;
+  font-size: 14px;
+  padding-left: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  text-align: left;
+  vertical-align:text-top;
 }
 
 .event-form-input{

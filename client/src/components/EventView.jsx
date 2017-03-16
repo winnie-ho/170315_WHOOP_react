@@ -242,12 +242,12 @@ class EventView extends React.Component{
           placeholder = "location" 
           defaultValue = {this.state.event.location} 
           className = "event-form-input"/> 
-          <input 
+          <textarea 
           type = "text" 
           onChange = {this.handleOnChangeDescription} 
           placeholder = "description" 
           defaultValue = {this.state.event.description} 
-          className = "event-form-input"/> 
+          className = "event-form-input-description"/> 
           <button onClick = {this.editEventInDB}>UPDATE</button>
         </form>
 

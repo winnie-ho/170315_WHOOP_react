@@ -72,7 +72,7 @@ class MemberNew extends React.Component {
 		// conditional for on addMember
 		if(this.state.newMember === true){
 			var memberDD = 
-			<div>
+			<div className = "add-member-form">
 				<select defaultValue = "select" onChange = {this.handleSelectorChange}>
 					<option disabled = "true">select</option>
 					{memberOptions}

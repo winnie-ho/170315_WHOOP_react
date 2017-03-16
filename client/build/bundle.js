@@ -8681,7 +8681,7 @@ var GroupNew = function (_React$Component) {
           _react2.default.createElement(
             "button",
             { onClick: this.props.addGroup },
-            " ADD GROUP "
+            " ADD "
           )
         )
       );
@@ -12516,7 +12516,7 @@ var EventNew = function (_React$Component) {
           _react2.default.createElement("input", { type: "text", onChange: this.handleOnChangeDate, placeholder: "date", className: "event-form-input" }),
           _react2.default.createElement("input", { type: "text", onChange: this.handleOnChangeTime, placeholder: "time", className: "event-form-input" }),
           _react2.default.createElement("input", { type: "text", onChange: this.handleOnChangeLocation, placeholder: "location", className: "event-form-input" }),
-          _react2.default.createElement("input", { type: "text", onChange: this.handleOnChangeDescription, placeholder: "description", className: "event-form-input-description" }),
+          _react2.default.createElement("textarea", { type: "text", onChange: this.handleOnChangeDescription, placeholder: "description", className: "event-form-input-description" }),
           _react2.default.createElement(
             "button",
             { onClick: this.addEvent },
@@ -12861,12 +12861,12 @@ var EventView = function (_React$Component) {
             placeholder: "location",
             defaultValue: this.state.event.location,
             className: "event-form-input" }),
-          _react2.default.createElement("input", {
+          _react2.default.createElement("textarea", {
             type: "text",
             onChange: this.handleOnChangeDescription,
             placeholder: "description",
             defaultValue: this.state.event.description,
-            className: "event-form-input" }),
+            className: "event-form-input-description" }),
           _react2.default.createElement(
             "button",
             { onClick: this.editEventInDB },
@@ -14456,7 +14456,7 @@ var MemberNew = function (_React$Component) {
 			if (this.state.newMember === true) {
 				var memberDD = _react2.default.createElement(
 					"div",
-					null,
+					{ className: "add-member-form" },
 					_react2.default.createElement(
 						"select",
 						{ defaultValue: "select", onChange: this.handleSelectorChange },
