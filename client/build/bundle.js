@@ -13583,6 +13583,7 @@ var Home = function (_React$Component) {
     _this.setUser = _this.setUser.bind(_this);
     _this.goBack = _this.goBack.bind(_this);
     _this.createAccount = _this.createAccount.bind(_this);
+    _this.getData = _this.getData.bind(_this);
 
     _this.state = {
       currentUser: null,
@@ -13595,6 +13596,7 @@ var Home = function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getUser();
+      this.getData();
     }
   }, {
     key: "getUser",
@@ -13615,6 +13617,19 @@ var Home = function (_React$Component) {
         }
       };
       request.send(null);
+    }
+  }, {
+    key: "getData",
+    value: function getData() {
+      var urlSpec = "memberships/1";
+      var word = "GET";
+      var callback = function (data) {
+        console.log("Warming up", data);
+      }.bind(this);
+      var DBQuery = new _dbHandler2.default();
+      var dataToSend = null;
+      var DBQuery = new _dbHandler2.default();
+      DBQuery.callDB(urlSpec, word, callback, dataToSend);
     }
   }, {
     key: "setUser",

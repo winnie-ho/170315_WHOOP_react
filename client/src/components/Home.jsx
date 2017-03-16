@@ -13,6 +13,7 @@ class Home extends React.Component {
     this.setUser = this.setUser.bind(this);
     this.goBack = this.goBack.bind(this);
     this.createAccount = this.createAccount.bind(this);
+    this.getData = this.getData.bind(this);
 
     this.state = {
       currentUser: null,
@@ -22,6 +23,7 @@ class Home extends React.Component {
 
   componentDidMount(){
     this.getUser();
+    this.getData();
   }
 
   getUser(){
@@ -39,6 +41,18 @@ class Home extends React.Component {
       }
     }
     request.send(null);
+  }
+
+  getData(){
+    var urlSpec = "memberships/1";
+    var word = "GET";
+    var callback = function(data){
+      console.log("Warming up", data);
+    }.bind(this);
+    var DBQuery = new dbHandler();
+    var dataToSend = null;
+    var DBQuery = new dbHandler();
+    DBQuery.callDB(urlSpec, word, callback, dataToSend);
   }
 
   setUser(user){

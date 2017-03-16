@@ -600,7 +600,7 @@ form{
   align-content: center;
 }
 .members-inner{
-  border: dashed 1px pink;
+  /*border: dashed 1px pink;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
