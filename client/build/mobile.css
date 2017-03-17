@@ -471,7 +471,7 @@ form{
 
 .events-board{
   /*border: green dashed 1px;*/
-  height: 66vh;
+  height: 64vh;
   width: 82vw;
   text-align: center;
   background-color: #F3F3F3;
@@ -483,10 +483,11 @@ form{
   align-content: center;
   padding: 5px;
   margin:0px;
-  margin-left: 2px;
+  margin-left: 5px;
 }
 
-.event-inner-div{
+.events-inner-div{
+  /*border: black dashed 1px;*/
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -494,9 +495,10 @@ form{
   align-content: center;
   align-items: center;
   width: 80vw;
-  /*border: black dashed 1px;*/
+  height: 68vh;
 }
 .event-tools{
+  /*border: red dashed 1px;*/
   height: 40px;
   width: 85vw;
   display: flex;
@@ -504,7 +506,6 @@ form{
   justify-content: center;
   align-items: center;
   align-content: center;
-  /*border: red dashed 1px;*/
 }
 
 .add-event-plus{
@@ -628,7 +629,7 @@ form{
   align-content: center;
   justify-content: space-between;
   height: 30px;
-  width: 130px;
+  width: 120px;
 }
 
 .member-tools{
@@ -640,7 +641,7 @@ form{
   justify-content: space-between;
   margin-bottom: 7px;
   height: 30px;
-  width: 50px;
+  width: 40px;
 }
 
 .new-member{
@@ -700,26 +701,27 @@ form{
 }
 
 .event-view-div{
+  /*border: black dashed 1px;*/
   height: 92vh;
-  width: 85vw;
+  width: 90vw;
   margin-top: 30px;
   display: flex;
+  padding: 0px;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  /*border: black dashed 1px;*/
 }
 
 .event-div{
+  /*border: dashed 1px green;*/
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-content: center;
   align-items: center;
-  margin:5px;
+  margin:2px;
   padding: 0px;
-  /*border: dashed 1px green;*/
-  width: 76vw;
+  width: 85vw;
   height: 80vh;
   overflow-y: hidden;
   overflow-x: scroll;
@@ -728,15 +730,15 @@ form{
 
 .event-details{
   /*border: dashed 1px red;*/
+  padding: 0px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-content: flex-start;
   align-items: flex-start;
-  width: 66vw;
-  height: 80vh;
-  margin: 5px;
-  padding: 3px;
+  width: 79vw;
+  height: 75vh;
+  margin: 2px;
 }
 
 .event-specs{
@@ -755,17 +757,20 @@ form{
   visibility: visible;
 }
 .map-side{
-  margin:2px;
-  /*border: dashed 1px green;*/
-  width: 70vw;
-  height: 80vh;
+  margin: 0px;
+  padding:0px;
+  /*border: dashed 1px pink;*/
+  width: 90vw;
+  height: 79vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-content: flex-start;
+  align-items: flex-end;
 }
 
 .main-map{
-  width: 70vw;
+  width: 80vw;
   height: 90vh;
 }
 .attendance-control{
@@ -807,7 +812,7 @@ form{
 
 .strava-div > select {
   margin-left: 5px;
-  width: 50vw;
+  width: 45vw;
   border: gray 1px solid;
 } 
 
