@@ -48,7 +48,8 @@ class GroupView extends React.Component {
     var urlSpec = "groups/" + this.groupSelected;
     var word = "GET";
     var callback = function(data){
-      this.setState({groupData: data, messages: data.messages, events: data.events}, this.scrollMsg());
+      this.setState({groupData: data, messages: data.messages, events: data.events});
+      this.scrollMsg()
     }.bind(this);
     var dataToSend = null;
     var DBQuery = new dbHandler();

@@ -41,7 +41,7 @@ class MemberNew extends React.Component {
 	}
 
 	addMember(event){
-		event.preventDefault();
+	event.preventDefault();
     var urlSpec = "memberships";
     var word = "POST";
     var callback = function(data){
@@ -63,7 +63,7 @@ class MemberNew extends React.Component {
 
 	render(){
 		// filling in the options for selector
-		console.log("memberoptions", this.state.users);
+
 		var memberOptions = this.state.users.map(function(user, index){
 			return <option	placeholder = "select" value = {index} key = {index}>
 							{user.name}
