@@ -12559,6 +12559,10 @@ var _EventNew = __webpack_require__(76);
 
 var _EventNew2 = _interopRequireDefault(_EventNew);
 
+var _DeleteConfirm = __webpack_require__(255);
+
+var _DeleteConfirm2 = _interopRequireDefault(_DeleteConfirm);
+
 var _MapView = __webpack_require__(126);
 
 var _MapView2 = _interopRequireDefault(_MapView);
@@ -12602,6 +12606,8 @@ var EventView = function (_React$Component) {
     _this.setRunLine = _this.setRunLine.bind(_this);
     _this.jumpRight = _this.jumpRight.bind(_this);
     _this.jumpLeft = _this.jumpLeft.bind(_this);
+    _this.deleteEventSwitch = _this.deleteEventSwitch.bind(_this);
+    _this.resetDeleteEvent = _this.resetDeleteEvent.bind(_this);
 
     _this.state = {
       attendees: [],
@@ -12615,7 +12621,8 @@ var EventView = function (_React$Component) {
       editLocation: null,
       editDescription: null,
       editRoute: null,
-      runLine: null
+      runLine: null,
+      deleteEvent: false
     };
     return _this;
   }
@@ -12693,6 +12700,16 @@ var EventView = function (_React$Component) {
       var dataToSend = null;
       var DBQuery = new _dbHandler2.default();
       DBQuery.callDB(urlSpec, word, callback, dataToSend);
+    }
+  }, {
+    key: "deleteEventSwitch",
+    value: function deleteEventSwitch() {
+      this.setState({ deleteEvent: true });
+    }
+  }, {
+    key: "resetDeleteEvent",
+    value: function resetDeleteEvent() {
+      this.setState({ deleteEvent: false });
     }
   }, {
     key: "deleteEvent",
@@ -12939,6 +12956,30 @@ var EventView = function (_React$Component) {
         );
       }
 
+      //event delete confirm conditional 
+      if (this.state.deleteEvent === true) {
+        var deleteBox = _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(_DeleteConfirm2.default, { deleteFunction: this.deleteEvent, resetFunction: this.resetDeleteEvent })
+        );
+      } else if (this.state.deleteEvent === false) {
+        deleteBox = _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(
+            "button",
+            { onClick: this.deleteEventSwitch, className: "icon-button" },
+            "\u2704"
+          ),
+          _react2.default.createElement(
+            "button",
+            { onClick: this.editEvent, className: "icon-button" },
+            "\u270E"
+          )
+        );
+      }
+
       return _react2.default.createElement(
         "div",
         { className: "event-view-div" },
@@ -12953,16 +12994,7 @@ var EventView = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "top-bar-right" },
-            _react2.default.createElement(
-              "button",
-              { onClick: this.deleteEvent, className: "icon-button" },
-              "\u2704"
-            ),
-            _react2.default.createElement(
-              "button",
-              { onClick: this.editEvent, className: "icon-button" },
-              "\u270E"
-            )
+            deleteBox
           )
         ),
         _react2.default.createElement(
@@ -13039,6 +13071,10 @@ var _Members = __webpack_require__(128);
 
 var _Members2 = _interopRequireDefault(_Members);
 
+var _DeleteConfirm = __webpack_require__(255);
+
+var _DeleteConfirm2 = _interopRequireDefault(_DeleteConfirm);
+
 var _reactRouter = __webpack_require__(9);
 
 var _dbHandler = __webpack_require__(15);
@@ -13061,7 +13097,6 @@ var GroupView = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (GroupView.__proto__ || Object.getPrototypeOf(GroupView)).call(this, props));
 
-    console.log("HERE", _this.props);
     _this.groupSelected = _this.props.location.state.groupId;
     _this.getData = _this.getData.bind(_this);
     _this.addMessage = _this.addMessage.bind(_this);
@@ -13073,6 +13108,8 @@ var GroupView = function (_React$Component) {
     _this.handleEditGroup = _this.handleEditGroup.bind(_this);
     _this.scrollMsg = _this.scrollMsg.bind(_this);
     _this.jumpRight = _this.jumpRight.bind(_this);
+    _this.deleteGroupSwitch = _this.deleteGroupSwitch.bind(_this);
+    _this.resetDeleteGroup = _this.resetDeleteGroup.bind(_this);
 
     _this.state = {
       groupData: [],
@@ -13084,7 +13121,8 @@ var GroupView = function (_React$Component) {
       name: null,
       editGroup: false,
       editedGroupId: null,
-      changedName: ""
+      changedName: "",
+      deleteGroup: false
     };
     return _this;
   }
@@ -13151,6 +13189,16 @@ var GroupView = function (_React$Component) {
       this.setState({ msg: event.target.value });
     }
   }, {
+    key: "deleteGroupSwitch",
+    value: function deleteGroupSwitch() {
+      this.setState({ deleteGroup: true });
+    }
+  }, {
+    key: "resetDeleteGroup",
+    value: function resetDeleteGroup() {
+      this.setState({ deleteGroup: false });
+    }
+  }, {
     key: "deleteGroup",
     value: function deleteGroup() {
       event.preventDefault();
@@ -13211,7 +13259,8 @@ var GroupView = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var groupTitle = this.state.groupData.name;
+
+      //group title and edit group name conditional    
       var upperGroupTitle = ("" + this.state.groupData.name).toUpperCase();
       if (this.state.editGroup === true) {
         var header = _react2.default.createElement(
@@ -13230,6 +13279,29 @@ var GroupView = function (_React$Component) {
           null,
           " ",
           upperGroupTitle
+        );
+      }
+      //group delete confirm conditional 
+      if (this.state.deleteGroup === true) {
+        var deleteBox = _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(_DeleteConfirm2.default, { deleteFunction: this.deleteGroup, resetFunction: this.resetDeleteGroup })
+        );
+      } else if (this.state.deleteGroup === false) {
+        deleteBox = _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(
+            "button",
+            { onClick: this.deleteGroupSwitch, className: "icon-button" },
+            "\u2704"
+          ),
+          _react2.default.createElement(
+            "button",
+            { onClick: this.handleEditGroup, className: "icon-button" },
+            "\u270E"
+          )
         );
       }
 
@@ -13256,16 +13328,7 @@ var GroupView = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "top-bar-right" },
-            _react2.default.createElement(
-              "button",
-              { onClick: this.deleteGroup, className: "icon-button" },
-              "\u2704"
-            ),
-            _react2.default.createElement(
-              "button",
-              { onClick: this.handleEditGroup, className: "icon-button" },
-              "\u270E"
-            )
+            deleteBox
           )
         ),
         _react2.default.createElement(
@@ -14920,7 +14983,6 @@ var MessagesContainer = function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.scrollMsg();
-      console.log('i scrolled');
     }
   }, {
     key: "render",
@@ -29856,6 +29918,95 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById("app"));
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DeleteConfirm = function (_React$Component) {
+  _inherits(DeleteConfirm, _React$Component);
+
+  function DeleteConfirm(props) {
+    _classCallCheck(this, DeleteConfirm);
+
+    var _this = _possibleConstructorReturn(this, (DeleteConfirm.__proto__ || Object.getPrototypeOf(DeleteConfirm)).call(this, props));
+
+    _this.setDeleteFunction = _this.setDeleteFunction.bind(_this);
+    _this.setResetFunction = _this.setResetFunction.bind(_this);
+
+    _this.state = {
+      deleteFunction: null,
+      resetFunction: null
+    };
+    return _this;
+  }
+
+  _createClass(DeleteConfirm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setDeleteFunction();
+      this.setResetFunction();
+    }
+  }, {
+    key: "setDeleteFunction",
+    value: function setDeleteFunction() {
+      this.setState({ deleteFunction: this.props.deleteFunction });
+    }
+  }, {
+    key: "setResetFunction",
+    value: function setResetFunction() {
+      this.setState({ resetFunction: this.props.resetFunction });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "delete-confirm" },
+        "Are you sure?",
+        _react2.default.createElement(
+          "div",
+          { className: "delete-confirm-inner" },
+          _react2.default.createElement(
+            "button",
+            { onClick: this.state.deleteFunction, className: "icon-button" },
+            "\u2714\uFE0E"
+          ),
+          _react2.default.createElement(
+            "button",
+            { onClick: this.state.resetFunction, className: "icon-button" },
+            "\u2718"
+          )
+        )
+      );
+    }
+  }]);
+
+  return DeleteConfirm;
+}(_react2.default.Component);
+
+exports.default = DeleteConfirm;
 
 /***/ })
 /******/ ]);

@@ -2,6 +2,7 @@ import React from "react";
 import dbHandler from "../dbHandler";
 import {Link, browserHistory, hashHistory} from "react-router";
 import EventNew from "./EventNew";
+import DeleteConfirm from "./DeleteConfirm"
 import MapView from "./MapView";
 import WeatherHook from "./WeatherHook";
 
@@ -28,6 +29,8 @@ class EventView extends React.Component{
     this.setRunLine = this.setRunLine.bind(this);
     this.jumpRight = this.jumpRight.bind(this);
     this.jumpLeft = this.jumpLeft.bind(this);
+    this.deleteEventSwitch = this.deleteEventSwitch.bind(this);
+    this.resetDeleteEvent = this.resetDeleteEvent.bind(this);
 
     this.state = {
       attendees: [],
@@ -42,6 +45,7 @@ class EventView extends React.Component{
       editDescription: null,
       editRoute: null,
       runLine: null,
+      deleteEvent: false
     }
   }
 
@@ -90,6 +94,14 @@ class EventView extends React.Component{
     var dataToSend = null;
     var DBQuery = new dbHandler();
     DBQuery.callDB(urlSpec, word, callback, dataToSend);
+  }
+
+  deleteEventSwitch(){
+    this.setState({deleteEvent: true});
+  }
+
+  resetDeleteEvent(){
+    this.setState({deleteEvent: false});
   }
 
   deleteEvent(){
@@ -284,13 +296,26 @@ class EventView extends React.Component{
         </div>
     }
 
+    //event delete confirm conditional 
+    if(this.state.deleteEvent === true){
+    var deleteBox = 
+    <div>
+      <DeleteConfirm deleteFunction = {this.deleteEvent} resetFunction = {this.resetDeleteEvent}/>
+    </div>
+    } else if (this.state.deleteEvent === false) {
+      deleteBox = 
+      <div>
+        <button onClick = {this.deleteEventSwitch} className = "icon-button">✄</button>
+        <button onClick = {this.editEvent} className = "icon-button">✎</button>
+      </div>
+    }
+
     return(
         <div className = "event-view-div">
           <div className = "top-bar">
             <div onClick = {this.goBack} > ←back </div>
             <div className = "top-bar-right">
-              <button onClick = {this.deleteEvent} className = "icon-button">✄</button>
-              <button onClick = {this.editEvent} className = "icon-button">✎</button>
+              {deleteBox}
             </div>
           </div>
 

@@ -532,7 +532,7 @@ form{
   flex-direction: column;
   align-items: flex-start;
   align-content: center;
-  justify-content: center;
+  justify-content: center;to
   /*border: blue dashed 1px;*/
 }
 
@@ -725,3 +725,15 @@ form{
   margin-left: 5px;
   width: 40vw;
 } 
+
+.delete-confirm{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.delete-confirm-inner{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}

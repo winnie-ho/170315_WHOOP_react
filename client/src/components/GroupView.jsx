@@ -3,6 +3,7 @@ import ReactDOM from "react-dom"
 import MessagesContainer from "./MessagesContainer"
 import EventsContainer from "./EventsContainer"
 import Members from "./Members"
+import DeleteConfirm from "./DeleteConfirm"
 import { Link, browserHistory, hashHistory } from "react-router";
 import dbHandler from "../dbHandler";
 
@@ -10,7 +11,6 @@ class GroupView extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("HERE", this.props);
     this.groupSelected = this.props.location.state.groupId;
     this.getData = this.getData.bind(this);
     this.addMessage = this.addMessage.bind(this);
@@ -22,6 +22,8 @@ class GroupView extends React.Component {
     this.handleEditGroup = this.handleEditGroup.bind(this);
     this.scrollMsg = this.scrollMsg.bind(this);
     this.jumpRight = this.jumpRight.bind(this);
+    this.deleteGroupSwitch = this.deleteGroupSwitch.bind(this);
+    this.resetDeleteGroup = this.resetDeleteGroup.bind(this);
 
     this.state = { 
       groupData: [],
@@ -33,7 +35,8 @@ class GroupView extends React.Component {
       name: null,
       editGroup: false,
       editedGroupId: null,
-      changedName: ""
+      changedName: "",
+      deleteGroup: false
     }
   }
 
@@ -49,7 +52,7 @@ class GroupView extends React.Component {
     var word = "GET";
     var callback = function(data){
       this.setState({groupData: data, messages: data.messages, events: data.events});
-      this.scrollMsg()
+      this.scrollMsg();
     }.bind(this);
     var dataToSend = null;
     var DBQuery = new dbHandler();
@@ -90,6 +93,14 @@ class GroupView extends React.Component {
 
   handleOnChangeMsg(event){
     this.setState({msg: event.target.value});
+  }
+
+  deleteGroupSwitch(){
+    this.setState({deleteGroup: true});
+  }
+
+  resetDeleteGroup(){
+    this.setState({deleteGroup: false});
   }
 
   deleteGroup(){
@@ -145,7 +156,8 @@ class GroupView extends React.Component {
   }
 
   render(){
-    var groupTitle = this.state.groupData.name
+
+  //group title and edit group name conditional    
     var upperGroupTitle = `${this.state.groupData.name}`.toUpperCase()
     if (this.state.editGroup===true){
       var header = <div className = "edit-group">
@@ -155,6 +167,20 @@ class GroupView extends React.Component {
       } else if (this.state.editGroup === false) {
         header = <div> {upperGroupTitle}</div>
       }
+  //group delete confirm conditional 
+    if(this.state.deleteGroup === true){
+    var deleteBox = 
+    <div>
+      <DeleteConfirm deleteFunction = {this.deleteGroup} resetFunction = {this.resetDeleteGroup}/>
+    </div>
+    } else if (this.state.deleteGroup === false) {
+      deleteBox = 
+      <div>
+        <button onClick = {this.deleteGroupSwitch} className = "icon-button">✄</button>
+        <button onClick = {this.handleEditGroup} className = "icon-button">✎</button>
+      </div>
+    }
+
     
     return(
       <div className="group-view">
@@ -163,10 +189,9 @@ class GroupView extends React.Component {
           <div>
             <Link to = "/groups">← my groups</Link>
           </div>
-          <div className = "top-bar-right">
-            <button onClick = {this.deleteGroup} className = "icon-button">✄</button>
-            <button onClick = {this.handleEditGroup} className = "icon-button">✎</button>
-          </div>
+            <div className = "top-bar-right">
+              {deleteBox}
+            </div>
         </div>
 
         <div className = "members-div">
@@ -178,39 +203,39 @@ class GroupView extends React.Component {
         </div>
         <div className = "group-main">
 
-          <div className = "message-board">
-            <MessagesContainer 
-            userId = {this.state.userId}
-            messages = {this.state.messages}
-            scrollMsg = {this.scrollMsg}
-            />
-            <form 
-            onSubmit = {this.addMessage} 
-            className = "new-message-form">
-            <input 
-            ref="form" 
-            type = "text" 
-            onChange = {this.handleOnChangeMsg} 
-            placeholder = "✏︎ message" 
-            className = "message-box"/> 
-            <button onClick = {this.addMessage}>POST</button>
-            </form>
-          </div>
+        <div className = "message-board">
+          <MessagesContainer 
+          userId = {this.state.userId}
+          messages = {this.state.messages}
+          scrollMsg = {this.scrollMsg}
+          />
+          <form 
+          onSubmit = {this.addMessage} 
+          className = "new-message-form">
+          <input 
+          ref="form" 
+          type = "text" 
+          onChange = {this.handleOnChangeMsg} 
+          placeholder = "✏︎ message" 
+          className = "message-box"/> 
+          <button onClick = {this.addMessage}>POST</button>
+          </form>
+        </div>
 
-          <div className = "arrow" onClick = {this.jumpRight}> ▷ </div>
-          <div className = "arrow" onClick = {this.jumpLeft}> ◀︎ </div>
+        <div className = "arrow" onClick = {this.jumpRight}> ▷ </div>
+        <div className = "arrow" onClick = {this.jumpLeft}> ◀︎ </div>
 
-          <div className = "events-board">
-            <h3>EVENTS</h3>
-            <EventsContainer 
-            userName = {this.state.userName} 
-            userId = {this.state.userId} 
-            selectedEvent = {this.state.selectedEvent} 
-            router = {this.props.router} 
-            addEventUpdate = {this.addEventUpdate} 
-            groupId = {this.groupSelected} 
-            events = {this.state.events}/>
-          </div>
+        <div className = "events-board">
+          <h3>EVENTS</h3>
+          <EventsContainer 
+          userName = {this.state.userName} 
+          userId = {this.state.userId} 
+          selectedEvent = {this.state.selectedEvent} 
+          router = {this.props.router} 
+          addEventUpdate = {this.addEventUpdate} 
+          groupId = {this.groupSelected} 
+          events = {this.state.events}/>
+        </div>
         </div>
           ⦿⦿
       </div>

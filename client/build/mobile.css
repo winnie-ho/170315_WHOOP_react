@@ -351,15 +351,15 @@ form{
 
 
 .group-view{
+  /*border: dashed red 1px;*/
   width: 100vw;
   height: 98vh;
   display: flex;
   flex-direction: column;
   padding:2px;
-  margin: 1px;
-  /*border: dashed red 1px;*/
+  margin: auto;
   justify-content: center;
-  align-content: space-between;
+  align-content: center;
   align-items: center;
 }
 
@@ -806,3 +806,16 @@ form{
   width: 50vw;
   border: gray 1px solid;
 } 
+
+.delete-confirm{
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.delete-confirm-inner{
+  display: flex;
+  flex-direction: row;
+
+}

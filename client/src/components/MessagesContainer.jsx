@@ -8,7 +8,6 @@ constructor(props){
 
 componentDidMount(){
   this.props.scrollMsg();
-  console.log ('i scrolled')
 }
 
 render() {
