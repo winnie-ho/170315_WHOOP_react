@@ -8592,7 +8592,11 @@ var EventListing = function (_React$Component) {
               _react2.default.createElement(
                 "p",
                 null,
-                event.date.slice(0, 10)
+                event.date.slice(8, 10),
+                "/",
+                event.date.slice(5, 7),
+                "/",
+                event.date.slice(0, 4)
               ),
               _react2.default.createElement(
                 "p",
@@ -12902,7 +12906,11 @@ var EventView = function (_React$Component) {
           _react2.default.createElement(
             "h3",
             null,
-            this.state.event.date.slice(0, 10)
+            this.state.event.date.slice(8, 10),
+            "/",
+            this.state.event.date.slice(5, 7),
+            "/",
+            this.state.event.date.slice(0, 4)
           ),
           _react2.default.createElement(
             "h3",

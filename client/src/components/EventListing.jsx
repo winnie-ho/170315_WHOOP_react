@@ -21,7 +21,7 @@ class EventListing extends React.Component{
  
               <div className = "event-box" onClick = {this.props.setEventView}>
               <h4>{event.name}</h4>
-              <p>{event.date.slice(0,10)}</p>
+              <p>{event.date.slice(8,10)}/{event.date.slice(5,7)}/{event.date.slice(0,4)}</p>
               <p>{event.time.slice(11,16)}</p>
               </div>
                 <Link className = "more" to = {

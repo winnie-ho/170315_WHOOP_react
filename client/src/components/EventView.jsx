@@ -267,7 +267,7 @@ class EventView extends React.Component{
       editEventForm = 
       <div className = "event-specs">
         <h2>{this.state.event.name}</h2>
-        <h3>{this.state.event.date.slice(0,10)}</h3>
+        <h3>{this.state.event.date.slice(8,10)}/{this.state.event.date.slice(5,7)}/{this.state.event.date.slice(0,4)}</h3>
         <h3>{this.state.event.time.slice(11,16)}</h3>
         <h4>{this.state.event.location}  </h4> 
         <h4>{this.state.event.description}</h4>
