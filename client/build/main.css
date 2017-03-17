@@ -3,6 +3,22 @@
     src: url("/resources/GeosansLight.ttf");
 }
 
+#app{
+  width: 100vw;
+  height: 100vh;
+  /*border: black 1px dashed;*/
+  display: flex;
+  justify-content: center;
+}
+
+.container{
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  /*border: gray 1px dashed;*/
+}
+
 body{
   font-family: GeoSansLight;
   display: flex;
@@ -141,7 +157,7 @@ a:hover{
 }
 
 input{
-  width:300px;
+  width: 20vw;
   padding: 5px;
   margin:5px;
   font-size: 14px;
