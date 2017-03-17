@@ -36,7 +36,7 @@ class GroupView extends React.Component {
       editGroup: false,
       editedGroupId: null,
       changedName: "",
-      deleteGroup: false
+      deleteGroup: false,
     }
   }
 
@@ -94,6 +94,7 @@ class GroupView extends React.Component {
   handleOnChangeMsg(event){
     this.setState({msg: event.target.value});
   }
+
 
   deleteGroupSwitch(){
     this.setState({deleteGroup: true});
@@ -171,7 +172,7 @@ class GroupView extends React.Component {
     if(this.state.deleteGroup === true){
     var deleteBox = 
     <div>
-      <DeleteConfirm deleteFunction = {this.deleteGroup} resetFunction = {this.resetDeleteGroup}/>
+      <DeleteConfirm deleteFunction = {this.deleteGroup} resetFunction = {this.resetDeleteGroup} dialogue = "Delete Group?"/>
     </div>
     } else if (this.state.deleteGroup === false) {
       deleteBox = 

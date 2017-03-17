@@ -1,6 +1,7 @@
 import React from "react";
 import MemberNew from "./MemberNew";
 import dbHandler from "../dbHandler";
+import DeleteConfirm from "./DeleteConfirm";
 import {Link, Router, browserHistory, hashHistory} from "react-router";
 
 class Members extends React.Component {
@@ -11,12 +12,15 @@ class Members extends React.Component {
 		this.setUserMembership = this.setUserMembership.bind(this);
 		this.uniqueMembers = this.uniqueMembers.bind(this);
 		this.goBack = this.goBack.bind(this);
+		this.leaveGroup = this.leaveGroup.bind(this);
+		this.resetLeaveGroup = this.resetLeaveGroup.bind(this);
 
 		this.state = {
 			memberships: [],
 			members: [],
 			isMember: false,
-			userMembership: null
+			userMembership: null,
+			leaveGroup: false,
 		}
 	}
 
@@ -75,7 +79,17 @@ class Members extends React.Component {
 		this.props.router.goBack();
 	}
 
+	leaveGroup(){
+		this.setState({leaveGroup:true});
+	}
+
+	resetLeaveGroup(){
+		this.setState({leaveGroup:false});
+		console.log("leaving");
+	}
+
 	render(){
+		console.log("leavegroup", this.state.leaveGroup);
 		//mapping members for render
 		var membersNodes = this.state.members.map((member, index)=>{
 	    return(
@@ -85,14 +99,29 @@ class Members extends React.Component {
 	    )
 	  })
 
+
+	  //leave group confirmation conditional 
+    if(this.state.leaveGroup === true){
+    var leaveBox = 
+    <div>
+      <DeleteConfirm deleteFunction = {this.removeMember} resetFunction = {this.resetLeaveGroup} dialogue = "Leave Group?"/>
+    </div>
+    } else if (this.state.leaveGroup === false) {
+      leaveBox = 
+      <div className = "member-tools" >
+	      <h1 onClick = {this.leaveGroup}>-</h1> 				
+	      <MemberNew groupId = {this.props.groupId} getMemberships = {this.getMemberships}/>
+      </div>
+    }
+
 		return(
 			<div className = "members-inner">
 				<div className = "members-add-div">
 					<h3>GROUPIES</h3>
-					<div className = "add-member-plus" onClick = {this.removeMember}>
-	   		 		<h1>-</h1> 
+					<div>
+	   		 		{leaveBox}
 	   		 	</div>
-					<MemberNew groupId = {this.props.groupId} getMemberships = {this.getMemberships}/>
+
 				</div>
 				<div className = "members-list-div">
 					{membersNodes}

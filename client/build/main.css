@@ -585,34 +585,35 @@ form{
   align-content: center;
 }
 
-.new-member{
-  display: flex;
+.members-add-div{
+/*  border: orange dashed 1px;
+*/  display: flex;
   flex-direction: row;
-  height: 20px;
-  /*border: blue dashed 1px;*/
-  justify-content: flex-end;
   align-items: center;
   align-content: center;
+  justify-content: space-between;
+  height: 30px;
+  width: 160px;
 }
 
-.members-add-div{
-  /*border: red dashed 1px;*/
+.member-tools{
+/*  border: dashed 1px green;
+*/  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  height: 30px;
+  width: 50px;
+}
+
+.add-member-form{
+  width: 60vw;
   display: flex;
   flex-direction: row;
   align-items: center;
-  align-content: flex-start;
-  justify-content: center;
-  height: 30px;
-}
-
-.add-member-plus{
-  margin-top: -10px;
-  margin-left: 5px; 
-}
-
-
-.add-member-plus:hover{
-    color: #FC7F2D;
+  margin-top: 10px;
 }
 
 .members-list-div{
@@ -636,20 +637,20 @@ form{
   align-items: flex-start;
 }
 .event-view-div{
+  /*border: black dashed 1px;*/
   height: 96vh;
   width: 100vw;
-  margin-top: 0px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  /*border: black dashed 1px;*/
 }
 .event-div{
+  /*border: dashed 1px red;*/
   justify-content: center;
   display: flex;
   flex-direction: row;
-  /*border: dashed 1px red;*/
   margin: 50px;
   width: 80vw;
   overflow-y: hidden;
@@ -727,9 +728,13 @@ form{
 } 
 
 .delete-confirm{
+  margin-left: 10px;
+  width: 200px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
+  align-content: center;
+  align-items: center;
 }
 
 .delete-confirm-inner{

@@ -627,11 +627,24 @@ form{
   display: flex;
   flex-direction: row;
   align-items: center;
-  align-content: flex-start;
+  align-content: center;
   justify-content: space-between;
   height: 30px;
-  width: 120px;
+  width: 130px;
 }
+
+.member-tools{
+  /*border: dashed 1px green;*/
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  height: 30px;
+  width: 50px;
+}
+
 .new-member{
   /*border: blue dashed 1px;*/
   display: flex;
@@ -642,21 +655,14 @@ form{
   align-content: center;
 }
 
+
 .add-member-form{
   width: 60vw;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
+  margin-top: 10px;
 
-.add-member-plus{
-  margin-top: -10px;
-  margin-left: 5px; 
-}
-
-
-.add-member-plus:hover{
-    color: #FC7F2D;
 }
 
 .members-list-div{
@@ -808,14 +814,17 @@ form{
 } 
 
 .delete-confirm{
+  width: 180px;
   display: flex;
-  flex-direction: column;
-
+  flex-direction: row;
   text-align: center;
+  justify-content: flex-end;
+  align-content: center;
+  align-items: center;
 }
 
 .delete-confirm-inner{
   display: flex;
   flex-direction: row;
-
+  justify-content: right;
 }

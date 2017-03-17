@@ -300,7 +300,7 @@ class EventView extends React.Component{
     if(this.state.deleteEvent === true){
     var deleteBox = 
     <div>
-      <DeleteConfirm deleteFunction = {this.deleteEvent} resetFunction = {this.resetDeleteEvent}/>
+      <DeleteConfirm deleteFunction = {this.deleteEvent} resetFunction = {this.resetDeleteEvent} dialogue = "Delete Event?"/>
     </div>
     } else if (this.state.deleteEvent === false) {
       deleteBox = 

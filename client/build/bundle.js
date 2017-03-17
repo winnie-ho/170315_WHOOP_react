@@ -12961,7 +12961,7 @@ var EventView = function (_React$Component) {
         var deleteBox = _react2.default.createElement(
           "div",
           null,
-          _react2.default.createElement(_DeleteConfirm2.default, { deleteFunction: this.deleteEvent, resetFunction: this.resetDeleteEvent })
+          _react2.default.createElement(_DeleteConfirm2.default, { deleteFunction: this.deleteEvent, resetFunction: this.resetDeleteEvent, dialogue: "Delete Event?" })
         );
       } else if (this.state.deleteEvent === false) {
         deleteBox = _react2.default.createElement(
@@ -13286,7 +13286,7 @@ var GroupView = function (_React$Component) {
         var deleteBox = _react2.default.createElement(
           "div",
           null,
-          _react2.default.createElement(_DeleteConfirm2.default, { deleteFunction: this.deleteGroup, resetFunction: this.resetDeleteGroup })
+          _react2.default.createElement(_DeleteConfirm2.default, { deleteFunction: this.deleteGroup, resetFunction: this.resetDeleteGroup, dialogue: "Delete Group?" })
         );
       } else if (this.state.deleteGroup === false) {
         deleteBox = _react2.default.createElement(
@@ -14705,7 +14705,7 @@ var MemberNew = function (_React$Component) {
 			} else if (this.state.newMember === false) {
 				memberDD = _react2.default.createElement(
 					"div",
-					{ className: "add-member-plus" },
+					null,
 					_react2.default.createElement(
 						"h1",
 						{ onClick: this.handleNewMember },
@@ -14717,7 +14717,7 @@ var MemberNew = function (_React$Component) {
 			// defining the render
 			return _react2.default.createElement(
 				"div",
-				{ className: "new-member" },
+				null,
 				memberDD
 			);
 		}
@@ -14753,6 +14753,10 @@ var _dbHandler = __webpack_require__(15);
 
 var _dbHandler2 = _interopRequireDefault(_dbHandler);
 
+var _DeleteConfirm = __webpack_require__(255);
+
+var _DeleteConfirm2 = _interopRequireDefault(_DeleteConfirm);
+
 var _reactRouter = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -14778,12 +14782,15 @@ var Members = function (_React$Component) {
 		_this.setUserMembership = _this.setUserMembership.bind(_this);
 		_this.uniqueMembers = _this.uniqueMembers.bind(_this);
 		_this.goBack = _this.goBack.bind(_this);
+		_this.leaveGroup = _this.leaveGroup.bind(_this);
+		_this.resetLeaveGroup = _this.resetLeaveGroup.bind(_this);
 
 		_this.state = {
 			memberships: [],
 			members: [],
 			isMember: false,
-			userMembership: null
+			userMembership: null,
+			leaveGroup: false
 		};
 		return _this;
 	}
@@ -14892,8 +14899,20 @@ var Members = function (_React$Component) {
 			this.props.router.goBack();
 		}
 	}, {
+		key: "leaveGroup",
+		value: function leaveGroup() {
+			this.setState({ leaveGroup: true });
+		}
+	}, {
+		key: "resetLeaveGroup",
+		value: function resetLeaveGroup() {
+			this.setState({ leaveGroup: false });
+			console.log("leaving");
+		}
+	}, {
 		key: "render",
 		value: function render() {
+			console.log("leavegroup", this.state.leaveGroup);
 			//mapping members for render
 			var membersNodes = this.state.members.map(function (member, index) {
 				return _react2.default.createElement(
@@ -14909,6 +14928,26 @@ var Members = function (_React$Component) {
 				);
 			});
 
+			//leave group confirmation conditional 
+			if (this.state.leaveGroup === true) {
+				var leaveBox = _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(_DeleteConfirm2.default, { deleteFunction: this.removeMember, resetFunction: this.resetLeaveGroup, dialogue: "Leave Group?" })
+				);
+			} else if (this.state.leaveGroup === false) {
+				leaveBox = _react2.default.createElement(
+					"div",
+					{ className: "member-tools" },
+					_react2.default.createElement(
+						"h1",
+						{ onClick: this.leaveGroup },
+						"-"
+					),
+					_react2.default.createElement(_MemberNew2.default, { groupId: this.props.groupId, getMemberships: this.getMemberships })
+				);
+			}
+
 			return _react2.default.createElement(
 				"div",
 				{ className: "members-inner" },
@@ -14922,14 +14961,9 @@ var Members = function (_React$Component) {
 					),
 					_react2.default.createElement(
 						"div",
-						{ className: "add-member-plus", onClick: this.removeMember },
-						_react2.default.createElement(
-							"h1",
-							null,
-							"-"
-						)
-					),
-					_react2.default.createElement(_MemberNew2.default, { groupId: this.props.groupId, getMemberships: this.getMemberships })
+						null,
+						leaveBox
+					)
 				),
 				_react2.default.createElement(
 					"div",
@@ -29954,10 +29988,12 @@ var DeleteConfirm = function (_React$Component) {
 
     _this.setDeleteFunction = _this.setDeleteFunction.bind(_this);
     _this.setResetFunction = _this.setResetFunction.bind(_this);
+    _this.setDialogue = _this.setDialogue.bind(_this);
 
     _this.state = {
       deleteFunction: null,
-      resetFunction: null
+      resetFunction: null,
+      dialogue: null
     };
     return _this;
   }
@@ -29967,6 +30003,7 @@ var DeleteConfirm = function (_React$Component) {
     value: function componentDidMount() {
       this.setDeleteFunction();
       this.setResetFunction();
+      this.setDialogue();
     }
   }, {
     key: "setDeleteFunction",
@@ -29979,12 +30016,17 @@ var DeleteConfirm = function (_React$Component) {
       this.setState({ resetFunction: this.props.resetFunction });
     }
   }, {
+    key: "setDialogue",
+    value: function setDialogue() {
+      this.setState({ dialogue: this.props.dialogue });
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
         "div",
         { className: "delete-confirm" },
-        "Are you sure?",
+        this.state.dialogue,
         _react2.default.createElement(
           "div",
           { className: "delete-confirm-inner" },

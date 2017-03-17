@@ -6,16 +6,19 @@ class DeleteConfirm extends React.Component{
     super(props)
     this.setDeleteFunction = this.setDeleteFunction.bind(this);
     this.setResetFunction = this.setResetFunction.bind(this);
+    this.setDialogue = this.setDialogue.bind(this);
 
     this.state = {
       deleteFunction: null,
       resetFunction: null,
+      dialogue: null,
     }
   }
 
   componentDidMount(){
     this.setDeleteFunction();
     this.setResetFunction();
+    this.setDialogue();
   }
 
   setDeleteFunction(){
@@ -26,13 +29,17 @@ class DeleteConfirm extends React.Component{
     this.setState({resetFunction: this.props.resetFunction});
   }
 
+  setDialogue(){
+    this.setState({dialogue: this.props.dialogue});
+  }
+
   render() {
     return(
       <div className = "delete-confirm">
-        Are you sure?
+        {this.state.dialogue}
         <div className = "delete-confirm-inner">
           <button onClick = {this.state.deleteFunction} className = "icon-button">✔︎</button>
-          <button onClick = {this.state.resetFunction}className = "icon-button">✘</button>
+          <button onClick = {this.state.resetFunction} className = "icon-button">✘</button>
         </div>
       </div>
     )
