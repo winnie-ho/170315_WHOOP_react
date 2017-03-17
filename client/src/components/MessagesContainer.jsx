@@ -14,7 +14,8 @@ render() {
   var messageNodes = this.props.messages.map((message, index)=>{
     return(
       <div className = "message-div" key = {index}>
-         <p key = {index}> <b>{message.userName} ▻ </b> {message.msg} </p>
+        <h6>{message.created_at.slice(8,10)}/{message.created_at.slice(5,7)}/{message.created_at.slice(0,4)}, {message.created_at.slice(11,16)} </h6>
+        <p key = {index}>  <b>{message.userName} ▻ </b> {message.msg} </p>
       </div>
     )
   })

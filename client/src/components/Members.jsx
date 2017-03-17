@@ -109,7 +109,7 @@ class Members extends React.Component {
     } else if (this.state.leaveGroup === false) {
       leaveBox = 
       <div className = "member-tools" >
-	      <h1 onClick = {this.leaveGroup}>-</h1> 				
+	      <h1 className = "go-back"onClick = {this.leaveGroup}>-</h1> 				
 	      <MemberNew groupId = {this.props.groupId} getMemberships = {this.getMemberships}/>
       </div>
     }

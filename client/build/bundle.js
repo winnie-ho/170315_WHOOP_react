@@ -14705,7 +14705,7 @@ var MemberNew = function (_React$Component) {
 			} else if (this.state.newMember === false) {
 				memberDD = _react2.default.createElement(
 					"div",
-					null,
+					{ className: "go-back" },
 					_react2.default.createElement(
 						"h1",
 						{ onClick: this.handleNewMember },
@@ -14941,7 +14941,7 @@ var Members = function (_React$Component) {
 					{ className: "member-tools" },
 					_react2.default.createElement(
 						"h1",
-						{ onClick: this.leaveGroup },
+						{ className: "go-back", onClick: this.leaveGroup },
 						"-"
 					),
 					_react2.default.createElement(_MemberNew2.default, { groupId: this.props.groupId, getMemberships: this.getMemberships })
@@ -15026,9 +15026,21 @@ var MessagesContainer = function (_React$Component) {
           "div",
           { className: "message-div", key: index },
           _react2.default.createElement(
+            "h6",
+            null,
+            message.created_at.slice(8, 10),
+            "/",
+            message.created_at.slice(5, 7),
+            "/",
+            message.created_at.slice(0, 4),
+            ", ",
+            message.created_at.slice(11, 16),
+            " "
+          ),
+          _react2.default.createElement(
             "p",
             { key: index },
-            " ",
+            "  ",
             _react2.default.createElement(
               "b",
               null,

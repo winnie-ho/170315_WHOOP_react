@@ -73,6 +73,11 @@ h2{
   font-size: 30px;
 }
 
+h6{
+  margin:0px;
+  color: #FC7F2D;
+}
+
 p{
   font-size: 14px;
 }
@@ -339,29 +344,29 @@ form{
 }
 
 .group-view{
+  /*border: dashed red 1px;*/
   display: flex;
   flex-direction: column;
   padding:10px;
-/*  border: dashed red 1px;
-*/  justify-content: center;
+  justify-content: center;
   align-content: space-between;
   align-items: center;
 }
 
 .top-bar-right{
+  /*border: dashed red 1px;*/
   width: 80vw;
   display: flex;
   flex-direction: row;
-  /*border: dashed red 1px;*/
   justify-content: flex-end;
   align-content: space-between;
   align-items: center;
 }
 
 .top-bar{
+  /*border: dashed red 1px;*/
   display: flex;
   flex-direction: row;
-  /*border: dashed red 1px;*/
   justify-content: flex-end;
   align-content: space-between;
   align-items: center;
@@ -401,26 +406,28 @@ form{
 
 }
 
-.message-box{
-  width: 250px;
-}
-
 .message-list{
-  height: 420px;
   /*border: red dashed 1px;*/
+  height: 420px;
   overflow-y: scroll;
   overflow-x: hidden;
-  margin: auto;
-
+  padding: 0px;
 }
 
 .message-div{
-  /*  border: red dashed 1px;
-*/display: flex;
-  flex-direction: column;
+  /*border: red dashed 1px;*/
+  display: flex;
+  flex-direction: column;`
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start; 
   text-align: left;
-  margin-left: 40px;
+  margin-left: 20px;
   width: 400px;
+}
+
+.message-div>p{
+  margin-top: 0px;
 }
 
 .fake-message-div{
@@ -436,7 +443,7 @@ form{
   height: 480px;
   width: 450px;
   padding-right: 30px;
-  padding-left: : 30px;
+  padding-left:30px;
   padding-bottom: 30px;
   border-radius: 10px;
   display: flex;
@@ -457,8 +464,7 @@ form{
   width: 350px;
 }
 .event-tools{
-/*  border: red dashed 1px;
-*/
+  /*border: red dashed 1px;*/
   height: 40px;
   display: flex;
   flex-direction: row;

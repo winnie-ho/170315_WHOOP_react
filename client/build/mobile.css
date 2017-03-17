@@ -424,40 +424,38 @@ form{
 }
 
 @media screen and (max-width: 320px) {
-  /* comes into efect for screens less than or equal to 320 pixels */
-.message-board{
-  /*border: green dashed 1px;*/
-  height: 64vh;
-  width: 81vw;
-  text-align: center;
-  background-color: #F3F3F3;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  padding: 5px;
-  margin:0px;
-  margin-left: 0px;
-}
+  /* comes into effect for screens less than or equal to 320 pixels */
+  .message-board{
+/*    border: green dashed 1px;
+*/    height: 64vh;
+    width: 81vw;
+    text-align: center;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 5px;
+    margin:0px;
+    margin-left: 0px;
+  }
 }
 
-.message-box{
-  width: 47vw;
-}
 
 .message-list{
+  /*border: red dashed 1px;*/
   margin: 0px;
   width: 80vw;
   height: 55vh;
   padding: 0px;
-  /*border: red dashed 1px;*/
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
 .message-div{
+  /*border: blue dashed 1px;*/
   margin:0px;
   padding-left: 5px;
   padding-right: 5px;
@@ -465,7 +463,6 @@ form{
   flex-direction: column;
   text-align: left;
   width: 75vw;
-  /*border: blue dashed 1px;*/
 }
 
 .fake-message-div{
@@ -590,6 +587,7 @@ form{
 .new-message-form{
   display: flex;
   flex-direction: row;
+  width: 82vw;
 }
 
 .new-event-form{
