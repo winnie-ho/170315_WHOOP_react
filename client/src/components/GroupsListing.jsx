@@ -77,6 +77,8 @@ class GroupsListing extends React.Component{
           </div>
           <div className = "new-group-fake">
           </div>
+          <div className = "new-group-fake">
+          </div>
         </div>
       </div>
     )

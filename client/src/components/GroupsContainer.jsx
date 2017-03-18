@@ -141,9 +141,6 @@ class GroupsContainer extends React.Component {
   }
 
   render(){
-
-    console.log("TIME",this.state.userTime);
-    console.log("GROUPS",this.state.groups);
     return(
       <div className="listing">
         <GroupsListing 

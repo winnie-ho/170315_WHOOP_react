@@ -13670,9 +13670,6 @@ var GroupsContainer = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-
-      console.log("TIME", this.state.userTime);
-      console.log("GROUPS", this.state.groups);
       return _react2.default.createElement(
         "div",
         { className: "listing" },
@@ -14497,6 +14494,7 @@ var GroupsListing = function (_React$Component) {
             { className: "new-group", onClick: this.props.handleNewGroup },
             newGroupForm
           ),
+          _react2.default.createElement("div", { className: "new-group-fake" }),
           _react2.default.createElement("div", { className: "new-group-fake" })
         )
       );
