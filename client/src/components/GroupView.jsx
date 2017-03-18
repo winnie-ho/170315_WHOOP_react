@@ -39,7 +39,7 @@ class GroupView extends React.Component {
       editedGroupId: null,
       changedName: "",
       deleteGroup: false,
-      lastSeen: null,
+      lastSeen: 0,
       msgUpdates: null,
     }
   }
@@ -77,7 +77,7 @@ class GroupView extends React.Component {
     var numberUpdates = 0;
     var groupMessages = this.state.messages;
     for(var msg of groupMessages){
-      if (this.state.lastSeen < msg.updated_at){
+      if (this.state.lastSeen < msg.updated_at && msg.user_id !== this.state.userId){
         numberUpdates ++;
       }
     }

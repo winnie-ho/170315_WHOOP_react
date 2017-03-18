@@ -13133,7 +13133,7 @@ var GroupView = function (_React$Component) {
       editedGroupId: null,
       changedName: "",
       deleteGroup: false,
-      lastSeen: null,
+      lastSeen: 0,
       msgUpdates: null
     };
     return _this;
@@ -13184,7 +13184,7 @@ var GroupView = function (_React$Component) {
         for (var _iterator = groupMessages[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var msg = _step.value;
 
-          if (this.state.lastSeen < msg.updated_at) {
+          if (this.state.lastSeen < msg.updated_at && msg.user_id !== this.state.userId) {
             numberUpdates++;
           }
         }
