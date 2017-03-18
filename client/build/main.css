@@ -252,6 +252,7 @@ nav{
 }
 
 .group{
+  /*border: red dashed 1px;*/
   background-color: #F3F3F3;
   height:200px;
   width: 200px;
@@ -263,7 +264,6 @@ nav{
   align-content: center;
   align-items: center;
   justify-content: center;
-  /*border: red dashed 1px;*/
 }
 
 
@@ -367,6 +367,7 @@ form{
 
 .group-view{
   /*border: dashed red 1px;*/
+  width: 95vw;
   display: flex;
   flex-direction: column;
   padding:10px;
@@ -377,7 +378,7 @@ form{
 
 .top-bar-right{
   /*border: dashed red 1px;*/
-  width: 80vw;
+  width: 70vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -387,6 +388,7 @@ form{
 
 .top-bar{
   /*border: dashed red 1px;*/
+  width: 80vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -421,8 +423,8 @@ form{
   text-align: center;
   background-color: #F3F3F3;
   border-radius: 10px;
-  height: 450px;
-  width: 450px;
+  height:35vw;
+  width: 35vw;
   padding: 30px;
   margin-bottom: 20px;
   justify-content: flex-end;
@@ -445,7 +447,7 @@ form{
 
 .message-list{
   /*border: red dashed 1px;*/
-  height: 420px;
+  height: 33vw;
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 0px;
@@ -477,8 +479,8 @@ form{
 .events-board{
   /*border: red dashed 1px;*/
   margin-left: 5px;
-  height: 480px;
-  width: 450px;
+  height:38vw;
+  width: 35vw;
   padding-right: 30px;
   padding-left:30px;
   padding-bottom: 30px;
@@ -619,7 +621,7 @@ form{
 
 .members-div{
   /*border: dashed 1px red;*/
-  width: 90vw;
+  width: 80vw;
   height: 100px;
   display: flex;
   flex-direction: row;
