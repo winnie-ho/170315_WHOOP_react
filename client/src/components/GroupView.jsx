@@ -24,6 +24,8 @@ class GroupView extends React.Component {
     this.jumpRight = this.jumpRight.bind(this);
     this.deleteGroupSwitch = this.deleteGroupSwitch.bind(this);
     this.resetDeleteGroup = this.resetDeleteGroup.bind(this);
+    this.getUpdates = this.getUpdates.bind(this);
+    this.setLastSeen = this.setLastSeen.bind(this);
 
     this.state = { 
       groupData: [],
@@ -37,6 +39,8 @@ class GroupView extends React.Component {
       editedGroupId: null,
       changedName: "",
       deleteGroup: false,
+      lastSeen: null,
+      msgUpdates: null,
     }
   }
 
@@ -52,11 +56,34 @@ class GroupView extends React.Component {
     var word = "GET";
     var callback = function(data){
       this.setState({groupData: data, messages: data.messages, events: data.events});
+      this.setLastSeen();
       this.scrollMsg();
+      this.getUpdates();
     }.bind(this);
     var dataToSend = null;
     var DBQuery = new dbHandler();
     DBQuery.callDB(urlSpec, word, callback, dataToSend);
+  }
+
+  setLastSeen(){
+    var time = new Date();
+    var timeNow = time.toISOString();
+    var getLastSeen = localStorage.getItem("lastSeen" + this.state.groupData.id);
+    this.setState({lastSeen: getLastSeen});
+    localStorage.setItem("lastSeen" + this.state.groupData.id, timeNow);
+  }
+
+  getUpdates(){
+    var numberUpdates = 0;
+    var groupMessages = this.state.messages;
+    for(var msg of groupMessages){
+      if (this.state.lastSeen < msg.updated_at){
+        numberUpdates ++;
+      }
+    }
+
+    console.log("updates", numberUpdates);
+    this.setState({msgUpdates: numberUpdates});
   }
 
   addMessage(event){
@@ -157,7 +184,7 @@ class GroupView extends React.Component {
   }
 
   render(){
-
+    console.log("groupData", this.state.groupData);
   //group title and edit group name conditional    
     var upperGroupTitle = `${this.state.groupData.name}`.toUpperCase()
     if (this.state.editGroup===true){
@@ -181,8 +208,17 @@ class GroupView extends React.Component {
         <button onClick = {this.handleEditGroup} className = "icon-button">✎</button>
       </div>
     }
+  //msg updates conditional 
+  if(this.state.msgUpdates > 0){
+    var msgAlert = 
+    <div className = "msgAlert">
+      <h5>{this.state.msgUpdates}</h5>
+    </div>
+  } else {
+    msgAlert = <div></div>
+  }
 
-    
+
     return(
       <div className="group-view">
         <h2>{header}</h2>
@@ -204,12 +240,17 @@ class GroupView extends React.Component {
         </div>
         <div className = "group-main">
 
+        
         <div className = "message-board">
+            {msgAlert}
           <MessagesContainer 
           userId = {this.state.userId}
           messages = {this.state.messages}
           scrollMsg = {this.scrollMsg}
+          msgUpdates = {this.state.msgUpdates}
           />
+
+
           <form 
           onSubmit = {this.addMessage} 
           className = "new-message-form">

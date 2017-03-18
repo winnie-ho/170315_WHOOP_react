@@ -14,14 +14,18 @@ class GroupsContainer extends React.Component {
     this.addMembership = this.addMembership.bind(this);
     this.handleNewGroup = this.handleNewGroup.bind(this);
     this.setAddedGroup = this.setAddedGroup.bind(this);
+    // this.getUpdates = this.getUpdates.bind(this);
+
 
     this.state = {
       groups: [],
       addedGroup: null,
       newGroup: false,
       userId: null,
+      userTime: null,
       userName: null,
-      recentGroup: null
+      recentGroup: null,
+      groupUpdates: null
     }
   }
 
@@ -36,10 +40,12 @@ class GroupsContainer extends React.Component {
     var callback = function(data){
       this.setState({
         userId: data.id,
-        userName: data.name
+        userName: data.name,
+        userTime: data.updated_at
       })
         console.log("setting userId:", this.state.userId);
         console.log("setting userName:", this.state.userName);
+        console.log("setting userTime:", this.state.userTime);
     }.bind(this);
     var dataToSend = null;
     var DBQuery = new dbHandler();
@@ -52,12 +58,28 @@ class GroupsContainer extends React.Component {
     var callback = function(data){
       this.setState({groups: data})
         console.log("setting groups:", this.state.groups);
+      // this.getUpdates();
     }.bind(this);
     var DBQuery = new dbHandler();
     var dataToSend = null;
     var DBQuery = new dbHandler();
     DBQuery.callDB(urlSpec, word, callback, dataToSend);
   }
+
+  // getUpdates(){
+  //   var numberUpdates = 0;
+  //   var groups = this.state.groups;
+  //   console.log("UserTime", this.state.userTime);
+  //   for(var group of groups){
+  //     console.log("SAMPLE", group.group.updated_at);
+  //     if (group.group.updated_at >= this.state.userTime){
+  //       numberUpdates ++;
+  //     }
+  //   }
+
+  //   console.log("updates", numberUpdates);
+  //   this.setState({groupUpdates: numberUpdates});
+  // }
 
   addGroup(event){
     event.preventDefault();
@@ -119,11 +141,15 @@ class GroupsContainer extends React.Component {
   }
 
   render(){
+
+    console.log("TIME",this.state.userTime);
+    console.log("GROUPS",this.state.groups);
     return(
       <div className="listing">
         <GroupsListing 
         userId = {this.state.userId} 
         userName = {this.state.userName} 
+        userTime = {this.state.userTime}
         newGroup = {this.state.newGroup} 
         setGroup = {this.setAddedGroup} 
         addGroup = {this.addGroup} 

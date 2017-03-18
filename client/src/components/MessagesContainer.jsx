@@ -11,6 +11,12 @@ componentDidMount(){
 }
 
 render() {
+
+  //sorting the messages by date
+  this.props.messages.sort(function(a,b){
+    return new Date(a.created_at).getTime() - new Date(b.created_at).getTime() 
+  });
+
   var messageNodes = this.props.messages.map((message, index)=>{
     return(
       <div className = "message-div" key = {index}>

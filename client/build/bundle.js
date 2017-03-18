@@ -13118,6 +13118,8 @@ var GroupView = function (_React$Component) {
     _this.jumpRight = _this.jumpRight.bind(_this);
     _this.deleteGroupSwitch = _this.deleteGroupSwitch.bind(_this);
     _this.resetDeleteGroup = _this.resetDeleteGroup.bind(_this);
+    _this.getUpdates = _this.getUpdates.bind(_this);
+    _this.setLastSeen = _this.setLastSeen.bind(_this);
 
     _this.state = {
       groupData: [],
@@ -13130,7 +13132,9 @@ var GroupView = function (_React$Component) {
       editGroup: false,
       editedGroupId: null,
       changedName: "",
-      deleteGroup: false
+      deleteGroup: false,
+      lastSeen: null,
+      msgUpdates: null
     };
     return _this;
   }
@@ -13150,11 +13154,57 @@ var GroupView = function (_React$Component) {
       var word = "GET";
       var callback = function (data) {
         this.setState({ groupData: data, messages: data.messages, events: data.events });
+        this.setLastSeen();
         this.scrollMsg();
+        this.getUpdates();
       }.bind(this);
       var dataToSend = null;
       var DBQuery = new _dbHandler2.default();
       DBQuery.callDB(urlSpec, word, callback, dataToSend);
+    }
+  }, {
+    key: "setLastSeen",
+    value: function setLastSeen() {
+      var time = new Date();
+      var timeNow = time.toISOString();
+      var getLastSeen = localStorage.getItem("lastSeen" + this.state.groupData.id);
+      this.setState({ lastSeen: getLastSeen });
+      localStorage.setItem("lastSeen" + this.state.groupData.id, timeNow);
+    }
+  }, {
+    key: "getUpdates",
+    value: function getUpdates() {
+      var numberUpdates = 0;
+      var groupMessages = this.state.messages;
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = groupMessages[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var msg = _step.value;
+
+          if (this.state.lastSeen < msg.updated_at) {
+            numberUpdates++;
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      console.log("updates", numberUpdates);
+      this.setState({ msgUpdates: numberUpdates });
     }
   }, {
     key: "addMessage",
@@ -13267,7 +13317,7 @@ var GroupView = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-
+      console.log("groupData", this.state.groupData);
       //group title and edit group name conditional    
       var upperGroupTitle = ("" + this.state.groupData.name).toUpperCase();
       if (this.state.editGroup === true) {
@@ -13312,6 +13362,20 @@ var GroupView = function (_React$Component) {
           )
         );
       }
+      //msg updates conditional 
+      if (this.state.msgUpdates > 0) {
+        var msgAlert = _react2.default.createElement(
+          "div",
+          { className: "msgAlert" },
+          _react2.default.createElement(
+            "h5",
+            null,
+            this.state.msgUpdates
+          )
+        );
+      } else {
+        msgAlert = _react2.default.createElement("div", null);
+      }
 
       return _react2.default.createElement(
         "div",
@@ -13354,10 +13418,12 @@ var GroupView = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "message-board" },
+            msgAlert,
             _react2.default.createElement(_MessagesContainer2.default, {
               userId: this.state.userId,
               messages: this.state.messages,
-              scrollMsg: this.scrollMsg
+              scrollMsg: this.scrollMsg,
+              msgUpdates: this.state.msgUpdates
             }),
             _react2.default.createElement(
               "form",
@@ -13465,14 +13531,18 @@ var GroupsContainer = function (_React$Component) {
     _this.addMembership = _this.addMembership.bind(_this);
     _this.handleNewGroup = _this.handleNewGroup.bind(_this);
     _this.setAddedGroup = _this.setAddedGroup.bind(_this);
+    // this.getUpdates = this.getUpdates.bind(this);
+
 
     _this.state = {
       groups: [],
       addedGroup: null,
       newGroup: false,
       userId: null,
+      userTime: null,
       userName: null,
-      recentGroup: null
+      recentGroup: null,
+      groupUpdates: null
     };
     return _this;
   }
@@ -13491,10 +13561,12 @@ var GroupsContainer = function (_React$Component) {
       var callback = function (data) {
         this.setState({
           userId: data.id,
-          userName: data.name
+          userName: data.name,
+          userTime: data.updated_at
         });
         console.log("setting userId:", this.state.userId);
         console.log("setting userName:", this.state.userName);
+        console.log("setting userTime:", this.state.userTime);
       }.bind(this);
       var dataToSend = null;
       var DBQuery = new _dbHandler2.default();
@@ -13508,12 +13580,29 @@ var GroupsContainer = function (_React$Component) {
       var callback = function (data) {
         this.setState({ groups: data });
         console.log("setting groups:", this.state.groups);
+        // this.getUpdates();
       }.bind(this);
       var DBQuery = new _dbHandler2.default();
       var dataToSend = null;
       var DBQuery = new _dbHandler2.default();
       DBQuery.callDB(urlSpec, word, callback, dataToSend);
     }
+
+    // getUpdates(){
+    //   var numberUpdates = 0;
+    //   var groups = this.state.groups;
+    //   console.log("UserTime", this.state.userTime);
+    //   for(var group of groups){
+    //     console.log("SAMPLE", group.group.updated_at);
+    //     if (group.group.updated_at >= this.state.userTime){
+    //       numberUpdates ++;
+    //     }
+    //   }
+
+    //   console.log("updates", numberUpdates);
+    //   this.setState({groupUpdates: numberUpdates});
+    // }
+
   }, {
     key: "addGroup",
     value: function addGroup(event) {
@@ -13581,12 +13670,16 @@ var GroupsContainer = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+
+      console.log("TIME", this.state.userTime);
+      console.log("GROUPS", this.state.groups);
       return _react2.default.createElement(
         "div",
         { className: "listing" },
         _react2.default.createElement(_GroupsListing2.default, {
           userId: this.state.userId,
           userName: this.state.userName,
+          userTime: this.state.userTime,
           newGroup: this.state.newGroup,
           setGroup: this.setAddedGroup,
           addGroup: this.addGroup,
@@ -14253,7 +14346,8 @@ var Group = function Group(props) {
           "state": {
             "groupId": props.groupId,
             "userName": props.userName,
-            "userId": props.userId
+            "userId": props.userId,
+            "userTime": props.userTime
           }
         } },
       props.group.name
@@ -14395,7 +14489,8 @@ var GroupsListing = function (_React$Component) {
               userName: _this2.props.userName,
               group: group.group,
               groupId: group.group_id,
-              groups: _this2.props.groups }));
+              groups: _this2.props.groups,
+              userTime: _this2.props.userTime }));
           }),
           _react2.default.createElement(
             "div",
@@ -14920,7 +15015,6 @@ var Members = function (_React$Component) {
 	}, {
 		key: "render",
 		value: function render() {
-			console.log("leavegroup", this.state.leaveGroup);
 			//mapping members for render
 			var membersNodes = this.state.members.map(function (member, index) {
 				return _react2.default.createElement(
@@ -15029,6 +15123,12 @@ var MessagesContainer = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+
+      //sorting the messages by date
+      this.props.messages.sort(function (a, b) {
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      });
+
       var messageNodes = this.props.messages.map(function (message, index) {
         return _react2.default.createElement(
           "div",

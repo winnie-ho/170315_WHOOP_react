@@ -9,7 +9,8 @@ const Group = (props) => (
         "state": {
           "groupId": props.groupId,
           "userName": props.userName,
-          "userId": props.userId
+          "userId": props.userId,
+          "userTime": props.userTime
         }
       }
     }>{props.group.name}

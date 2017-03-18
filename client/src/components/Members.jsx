@@ -89,7 +89,6 @@ class Members extends React.Component {
 	}
 
 	render(){
-		console.log("leavegroup", this.state.leaveGroup);
 		//mapping members for render
 		var membersNodes = this.state.members.map((member, index)=>{
 	    return(
