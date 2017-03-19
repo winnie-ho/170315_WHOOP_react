@@ -13105,6 +13105,7 @@ var GroupView = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (GroupView.__proto__ || Object.getPrototypeOf(GroupView)).call(this, props));
 
+    console.log(_this.props);
     _this.groupSelected = _this.props.location.state.groupId;
     _this.getData = _this.getData.bind(_this);
     _this.addMessage = _this.addMessage.bind(_this);
@@ -13133,7 +13134,7 @@ var GroupView = function (_React$Component) {
       editedGroupId: null,
       changedName: "",
       deleteGroup: false,
-      lastSeen: 0,
+      lastSeen: _this.props.location.state.userTime,
       msgUpdates: null
     };
     return _this;
@@ -13167,9 +13168,15 @@ var GroupView = function (_React$Component) {
     value: function setLastSeen() {
       var time = new Date();
       var timeNow = time.toISOString();
-      var getLastSeen = localStorage.getItem("lastSeen" + this.state.groupData.id);
+      var getLastSeen = null;
+      if (localStorage.getItem("lastSeen-" + this.state.groupData.id + "-" + this.state.userId) === null) {
+        getLastSeen = this.props.location.state.userTime;
+      } else {
+        getLastSeen = localStorage.getItem("lastSeen-" + this.state.groupData.id + "-" + this.state.userId);
+      }
       this.setState({ lastSeen: getLastSeen });
-      localStorage.setItem("lastSeen" + this.state.groupData.id, timeNow);
+      console.log("LAST SEEN", getLastSeen);
+      localStorage.setItem("lastSeen-" + this.state.groupData.id + "-" + this.state.userId, timeNow);
     }
   }, {
     key: "getUpdates",
