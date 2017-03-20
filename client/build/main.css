@@ -89,9 +89,6 @@ h2{
   font-size: 30px;
 }
 
-h3{
-  margin:5px;
-}
 
 h5{
   margin:0px;
@@ -257,7 +254,10 @@ nav{
   margin: 5px;
   padding: 0px;
   clear: left;
+}
 
+.events-board > h3{
+  margin: 3px;
 }
 
 
