@@ -13538,8 +13538,8 @@ var GroupsContainer = function (_React$Component) {
     _this.addMembership = _this.addMembership.bind(_this);
     _this.handleNewGroup = _this.handleNewGroup.bind(_this);
     _this.setAddedGroup = _this.setAddedGroup.bind(_this);
-    // this.getUpdates = this.getUpdates.bind(this);
-
+    _this.setLastSeen = _this.setLastSeen.bind(_this);
+    _this.getUpdates = _this.getUpdates.bind(_this);
 
     _this.state = {
       groups: [],
@@ -13549,7 +13549,9 @@ var GroupsContainer = function (_React$Component) {
       userTime: null,
       userName: null,
       recentGroup: null,
-      groupUpdates: null
+      groupUpdates: [],
+      eventUpdates: [],
+      msgUpdates: null
     };
     return _this;
   }
@@ -13587,29 +13589,128 @@ var GroupsContainer = function (_React$Component) {
       var callback = function (data) {
         this.setState({ groups: data });
         console.log("setting groups:", this.state.groups);
-        // this.getUpdates();
+        this.setLastSeen();
+        this.getUpdates();
       }.bind(this);
       var DBQuery = new _dbHandler2.default();
       var dataToSend = null;
       var DBQuery = new _dbHandler2.default();
       DBQuery.callDB(urlSpec, word, callback, dataToSend);
     }
+  }, {
+    key: "setLastSeen",
+    value: function setLastSeen() {
+      var time = new Date();
+      var timeNow = time.toISOString();
+      var getLastSeen = null;
+      if (localStorage.getItem("lastSeen-" + this.state.userId) === null) {
+        getLastSeen = this.state.userTime;
+      } else {
+        getLastSeen = localStorage.getItem("lastSeen-" + this.state.userId);
+      }
+      this.setState({ lastSeen: getLastSeen });
+      console.log("LAST SEEN", getLastSeen);
+      localStorage.setItem("lastSeen-" + this.state.userId, timeNow);
+    }
+  }, {
+    key: "getUpdates",
+    value: function getUpdates() {
+      var groups = this.state.groups;
+      var gUpdates = [];
+      var eUpdates = [];
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-    // getUpdates(){
-    //   var numberUpdates = 0;
-    //   var groups = this.state.groups;
-    //   console.log("UserTime", this.state.userTime);
-    //   for(var group of groups){
-    //     console.log("SAMPLE", group.group.updated_at);
-    //     if (group.group.updated_at >= this.state.userTime){
-    //       numberUpdates ++;
-    //     }
-    //   }
+      try {
+        for (var _iterator = groups[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var group = _step.value;
 
-    //   console.log("updates", numberUpdates);
-    //   this.setState({groupUpdates: numberUpdates});
-    // }
+          if (this.state.lastSeen < group.group.updated_at) {
+            gUpdates.push(group.group_id);
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
 
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = groups[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var group = _step2.value;
+          var _iteratorNormalCompletion3 = true;
+          var _didIteratorError3 = false;
+          var _iteratorError3 = undefined;
+
+          try {
+            for (var _iterator3 = group.group.events[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+              var event = _step3.value;
+
+              if (this.state.lastSeen < event.updated_at) {
+                eUpdates.push(group.group_id);
+              }
+            }
+          } catch (err) {
+            _didIteratorError3 = true;
+            _iteratorError3 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
+              }
+            } finally {
+              if (_didIteratorError3) {
+                throw _iteratorError3;
+              }
+            }
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      this.setState({ groupUpdates: gUpdates });
+      this.setState({ eventUpdates: eUpdates });
+
+      // for(var group of groups){
+      //   for (var msg of group.group.messages){
+      //   console.log("message:", msg.updated_at);
+      //     if (this.state.lastSeen < event.updated_at){
+      //       msgUpdates ++;
+      //     }
+      //   }
+      // }
+
+      console.log("group updates", this.state.groupUpdates);
+      console.log("event updates", this.state.eventUpdates);
+      // console.log("msg updates", msgUpdates);
+      // this.setState({msgUpdates: msgUpdates});
+    }
   }, {
     key: "addGroup",
     value: function addGroup(event) {
@@ -13688,7 +13789,9 @@ var GroupsContainer = function (_React$Component) {
           setGroup: this.setAddedGroup,
           addGroup: this.addGroup,
           groups: this.state.groups,
-          handleNewGroup: this.handleNewGroup })
+          handleNewGroup: this.handleNewGroup,
+          groupUpdates: this.state.groupUpdates,
+          eventUpdates: this.state.eventUpdates })
       );
     }
   }]);
@@ -14331,6 +14434,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
@@ -14339,25 +14444,68 @@ var _reactRouter = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Group = function Group(props) {
-  return _react2.default.createElement(
-    "div",
-    { className: "group" },
-    _react2.default.createElement(
-      _reactRouter.Link,
-      { to: {
-          "pathname": "/groups/" + props.groupId,
-          "state": {
-            "groupId": props.groupId,
-            "userName": props.userName,
-            "userId": props.userId,
-            "userTime": props.userTime
-          }
-        } },
-      props.group.name
-    )
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Group = function (_React$Component) {
+  _inherits(Group, _React$Component);
+
+  function Group(props) {
+    _classCallCheck(this, Group);
+
+    return _possibleConstructorReturn(this, (Group.__proto__ || Object.getPrototypeOf(Group)).call(this, props));
+  }
+
+  _createClass(Group, [{
+    key: "render",
+    value: function render() {
+      if (this.props.eventUpdates == -1) {
+        var eventAlert = _react2.default.createElement("div", null);
+      } else if (this.props.eventUpdates >= 0) {
+        eventAlert = _react2.default.createElement(
+          "div",
+          { className: "alerts" },
+          _react2.default.createElement(
+            "h3",
+            null,
+            "\uD83D\uDDD3"
+          )
+        );
+      }
+      console.log("result", this.props.eventUpdates);
+
+      // var alertNodes = 
+      //   <div className = "alerts"> 
+      //     <h3>💬</h3>
+
+      //   </div>
+
+      return _react2.default.createElement(
+        "div",
+        { className: "group" },
+        _react2.default.createElement(
+          _reactRouter.Link,
+          { to: {
+              "pathname": "/groups/" + this.props.groupId,
+              "state": {
+                "groupId": this.props.groupId,
+                "userName": this.props.userName,
+                "userId": this.props.userId,
+                "userTime": this.props.userTime
+              }
+            } },
+          this.props.group.name
+        ),
+        eventAlert
+      );
+    }
+  }]);
+
+  return Group;
+}(_react2.default.Component);
 
 exports.default = Group;
 
@@ -14406,6 +14554,7 @@ var GroupsListing = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (GroupsListing.__proto__ || Object.getPrototypeOf(GroupsListing)).call(this, props));
 
+    console.log(_this.props.eventUpdates);
     _this.doSearch = _this.doSearch.bind(_this);
     _this.handleNewGroup = _this.handleNewGroup.bind(_this);
     _this.resetNewGroup = _this.resetNewGroup.bind(_this);
@@ -14444,6 +14593,8 @@ var GroupsListing = function (_React$Component) {
       } else if (this.props.newGroup === false) {
         newGroupForm = "+";
       }
+
+      console.log("eventUpdates in GL", this.props.eventUpdates);
 
       return _react2.default.createElement(
         "div",
@@ -14494,7 +14645,9 @@ var GroupsListing = function (_React$Component) {
               group: group.group,
               groupId: group.group_id,
               groups: _this2.props.groups,
-              userTime: _this2.props.userTime }));
+              userTime: _this2.props.userTime
+              // groupUpdates = {this.props.groupUpdates}
+              , eventUpdates: _this2.props.eventUpdates.indexOf(group.group_id) }));
           }),
           _react2.default.createElement(
             "div",

@@ -237,6 +237,26 @@ nav{
   justify-content:center;
 }
 
+.alerts{
+  border: #FC7F2D solid 2px;
+  background-color: white;
+  color: white;
+  border-radius: 50px;
+  width: 70px;
+  height: 28px;
+  text-align: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  float: right;
+  margin: 20px;
+}
+.alerts>p{
+  margin:;
+}
+
 .groups-scroll{
   /*border: blue dashed 1px;*/
   width: 670px;
@@ -261,6 +281,7 @@ nav{
   margin: 10px;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   align-content: center;
   align-items: center;
   justify-content: center;

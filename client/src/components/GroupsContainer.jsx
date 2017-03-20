@@ -14,7 +14,8 @@ class GroupsContainer extends React.Component {
     this.addMembership = this.addMembership.bind(this);
     this.handleNewGroup = this.handleNewGroup.bind(this);
     this.setAddedGroup = this.setAddedGroup.bind(this);
-    // this.getUpdates = this.getUpdates.bind(this);
+    this.setLastSeen = this.setLastSeen.bind(this);
+    this.getUpdates = this.getUpdates.bind(this);
 
 
     this.state = {
@@ -25,7 +26,9 @@ class GroupsContainer extends React.Component {
       userTime: null,
       userName: null,
       recentGroup: null,
-      groupUpdates: null
+      groupUpdates: [],
+      eventUpdates: [],
+      msgUpdates: null
     }
   }
 
@@ -58,7 +61,8 @@ class GroupsContainer extends React.Component {
     var callback = function(data){
       this.setState({groups: data})
         console.log("setting groups:", this.state.groups);
-      // this.getUpdates();
+        this.setLastSeen();
+        this.getUpdates();
     }.bind(this);
     var DBQuery = new dbHandler();
     var dataToSend = null;
@@ -66,20 +70,55 @@ class GroupsContainer extends React.Component {
     DBQuery.callDB(urlSpec, word, callback, dataToSend);
   }
 
-  // getUpdates(){
-  //   var numberUpdates = 0;
-  //   var groups = this.state.groups;
-  //   console.log("UserTime", this.state.userTime);
-  //   for(var group of groups){
-  //     console.log("SAMPLE", group.group.updated_at);
-  //     if (group.group.updated_at >= this.state.userTime){
-  //       numberUpdates ++;
-  //     }
-  //   }
+  setLastSeen(){
+    var time = new Date();
+    var timeNow = time.toISOString();
+    var getLastSeen = null;
+    if(localStorage.getItem("lastSeen-" + this.state.userId) === null){
+      getLastSeen = this.state.userTime;
+    }else{
+      getLastSeen = localStorage.getItem("lastSeen-" + this.state.userId)
+    }
+    this.setState({lastSeen: getLastSeen});
+    console.log("LAST SEEN", getLastSeen);
+    localStorage.setItem("lastSeen-" + this.state.userId, timeNow);
+  }
 
-  //   console.log("updates", numberUpdates);
-  //   this.setState({groupUpdates: numberUpdates});
-  // }
+  getUpdates(){
+    var groups = this.state.groups;
+    var gUpdates = [];
+    var eUpdates = [];
+    for(var group of groups){
+      if (this.state.lastSeen < group.group.updated_at){
+      gUpdates.push(group.group_id);
+      }
+    }
+
+    for(var group of groups){
+      for (var event of group.group.events){
+        if (this.state.lastSeen < event.updated_at){
+        eUpdates.push(group.group_id);
+        }
+      }
+    }
+
+    this.setState({groupUpdates: gUpdates});
+    this.setState({eventUpdates: eUpdates});
+
+    // for(var group of groups){
+    //   for (var msg of group.group.messages){
+    //   console.log("message:", msg.updated_at);
+    //     if (this.state.lastSeen < event.updated_at){
+    //       msgUpdates ++;
+    //     }
+    //   }
+    // }
+
+    console.log("group updates", this.state.groupUpdates);
+    console.log("event updates", this.state.eventUpdates);
+    // console.log("msg updates", msgUpdates);
+    // this.setState({msgUpdates: msgUpdates});
+  }
 
   addGroup(event){
     event.preventDefault();
@@ -151,7 +190,9 @@ class GroupsContainer extends React.Component {
         setGroup = {this.setAddedGroup} 
         addGroup = {this.addGroup} 
         groups = {this.state.groups} 
-        handleNewGroup = {this.handleNewGroup}/>
+        handleNewGroup = {this.handleNewGroup}
+        groupUpdates = {this.state.groupUpdates}
+        eventUpdates = {this.state.eventUpdates}/>
       </div>
     )
   }
