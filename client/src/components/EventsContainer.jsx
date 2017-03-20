@@ -67,7 +67,8 @@ render() {
         userName = {this.props.userName} 
         searchQuery = {this.state.searchQuery} 
         events = {this.props.events} 
-        setEventView = {this.setEventView}/>
+        setEventView = {this.setEventView}
+        groupId = {this.props.groupId}/>
     </div>
     )
   }

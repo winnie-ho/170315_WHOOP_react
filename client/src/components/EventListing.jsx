@@ -4,6 +4,7 @@ import {Link} from "react-router";
 class EventListing extends React.Component{
   constructor(props){
     super(props)
+    console.log(this.props);
   }
 
   render() {
@@ -27,10 +28,11 @@ class EventListing extends React.Component{
                 <Link className = "more" to = {
                   {
                     "pathname": "/groups/:id/showEvent",
-                    "query":{
+                    "state":{
                       "userName": this.props.userName,
                       "userId": this.props.userId,
-                      "event": JSON.stringify(event)
+                      "event": JSON.stringify(event),
+                      "groupId": this.props.groupId
                     }
                   }
                 }>more▷</Link>

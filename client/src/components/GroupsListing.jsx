@@ -78,7 +78,8 @@ class GroupsListing extends React.Component{
               groups = {this.props.groups}
               userTime = {this.props.userTime}
               // groupUpdates = {this.props.groupUpdates}
-              eventUpdates = {this.props.eventUpdates.indexOf(group.group_id)}/>
+              eventUpdates = {this.props.eventUpdates.indexOf(group.group_id)}
+              router = {this.props.router}/>
             ))
         }
           <div className = "new-group" onClick = {this.props.handleNewGroup}>

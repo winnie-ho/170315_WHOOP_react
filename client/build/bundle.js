@@ -8559,7 +8559,10 @@ var EventListing = function (_React$Component) {
   function EventListing(props) {
     _classCallCheck(this, EventListing);
 
-    return _possibleConstructorReturn(this, (EventListing.__proto__ || Object.getPrototypeOf(EventListing)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EventListing.__proto__ || Object.getPrototypeOf(EventListing)).call(this, props));
+
+    console.log(_this.props);
+    return _this;
   }
 
   _createClass(EventListing, [{
@@ -8608,10 +8611,11 @@ var EventListing = function (_React$Component) {
               _reactRouter.Link,
               { className: "more", to: {
                   "pathname": "/groups/:id/showEvent",
-                  "query": {
+                  "state": {
                     "userName": _this2.props.userName,
                     "userId": _this2.props.userId,
-                    "event": JSON.stringify(event)
+                    "event": JSON.stringify(event),
+                    "groupId": _this2.props.groupId
                   }
                 } },
               "more\u25B7"
@@ -12591,7 +12595,7 @@ var EventView = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (EventView.__proto__ || Object.getPrototypeOf(EventView)).call(this, props));
 
-    _this.eventId = _this.props.location.query.id;
+    _this.eventId = _this.props.location.state.id;
     _this.deleteEvent = _this.deleteEvent.bind(_this);
     _this.addAttendee = _this.addAttendee.bind(_this);
     _this.getAttendees = _this.getAttendees.bind(_this);
@@ -12645,7 +12649,7 @@ var EventView = function (_React$Component) {
   }, {
     key: "parseEvent",
     value: function parseEvent() {
-      var eventString = this.props.location.query.event;
+      var eventString = this.props.location.state.event;
       var eventObject = JSON.parse(eventString);
       this.setState({ event: eventObject });
     }
@@ -12680,9 +12684,9 @@ var EventView = function (_React$Component) {
           for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var attendee = _step.value;
 
-            if (attendee.userName == this.props.location.query.userName) {
+            if (attendee.userName == this.props.location.state.userName) {
               this.setState({ attendees: data, going: true, attendeeId: data[data.length - 1].id });
-            } else if (attendee.userName !== this.props.location.query.userName) {
+            } else if (attendee.userName !== this.props.location.state.userName) {
               this.setState({ going: false, attendees: data });
             }
           }
@@ -12741,8 +12745,8 @@ var EventView = function (_React$Component) {
       var data = {
         attendee: {
           event_id: this.state.event.id,
-          user_id: this.props.location.query.userId,
-          userName: this.props.location.query.userName
+          user_id: this.props.location.state.userId,
+          userName: this.props.location.state.userName
         }
       };
       var dataToSend = JSON.stringify(data);
@@ -13384,6 +13388,20 @@ var GroupView = function (_React$Component) {
         msgAlert = _react2.default.createElement("div", null);
       }
 
+      if (this.props.location.state.eventUpdates > -1) {
+        var eventAlert = _react2.default.createElement(
+          "div",
+          { className: "alerts" },
+          _react2.default.createElement(
+            "h5",
+            null,
+            "\uD83D\uDDD3"
+          )
+        );
+      } else {
+        eventAlert = "";
+      }
+
       return _react2.default.createElement(
         "div",
         { className: "group-view" },
@@ -13463,10 +13481,11 @@ var GroupView = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "events-board" },
+            eventAlert,
             _react2.default.createElement(
               "h3",
               null,
-              "EVENTS"
+              "EVENTS "
             ),
             _react2.default.createElement(_EventsContainer2.default, {
               userName: this.state.userName,
@@ -13706,6 +13725,7 @@ var GroupsContainer = function (_React$Component) {
       //   }
       // }
 
+      console.log("groups", this.state.groups);
       console.log("group updates", this.state.groupUpdates);
       console.log("event updates", this.state.eventUpdates);
       // console.log("msg updates", msgUpdates);
@@ -13791,7 +13811,8 @@ var GroupsContainer = function (_React$Component) {
           groups: this.state.groups,
           handleNewGroup: this.handleNewGroup,
           groupUpdates: this.state.groupUpdates,
-          eventUpdates: this.state.eventUpdates })
+          eventUpdates: this.state.eventUpdates,
+          router: this.props.router })
       );
     }
   }]);
@@ -14412,7 +14433,8 @@ var EventsContainer = function (_React$Component) {
           userName: this.props.userName,
           searchQuery: this.state.searchQuery,
           events: this.props.events,
-          setEventView: this.setEventView })
+          setEventView: this.setEventView,
+          groupId: this.props.groupId })
       );
     }
   }]);
@@ -14494,7 +14516,8 @@ var Group = function (_React$Component) {
                 "groupId": this.props.groupId,
                 "userName": this.props.userName,
                 "userId": this.props.userId,
-                "userTime": this.props.userTime
+                "userTime": this.props.userTime,
+                "eventUpdates": this.props.eventUpdates
               }
             } },
           this.props.group.name
@@ -14647,7 +14670,8 @@ var GroupsListing = function (_React$Component) {
               groups: _this2.props.groups,
               userTime: _this2.props.userTime
               // groupUpdates = {this.props.groupUpdates}
-              , eventUpdates: _this2.props.eventUpdates.indexOf(group.group_id) }));
+              , eventUpdates: _this2.props.eventUpdates.indexOf(group.group_id),
+              router: _this2.props.router }));
           }),
           _react2.default.createElement(
             "div",

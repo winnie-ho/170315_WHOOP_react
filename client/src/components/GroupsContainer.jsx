@@ -114,6 +114,7 @@ class GroupsContainer extends React.Component {
     //   }
     // }
 
+    console.log("groups", this.state.groups);
     console.log("group updates", this.state.groupUpdates);
     console.log("event updates", this.state.eventUpdates);
     // console.log("msg updates", msgUpdates);
@@ -192,7 +193,8 @@ class GroupsContainer extends React.Component {
         groups = {this.state.groups} 
         handleNewGroup = {this.handleNewGroup}
         groupUpdates = {this.state.groupUpdates}
-        eventUpdates = {this.state.eventUpdates}/>
+        eventUpdates = {this.state.eventUpdates}
+        router = {this.props.router}/>
       </div>
     )
   }

@@ -225,6 +225,15 @@ class GroupView extends React.Component {
     msgAlert = <div></div>
   }
 
+  if(this.props.location.state.eventUpdates > -1){
+    var eventAlert =
+    <div className = "alerts">
+      <h5>🗓</h5>
+    </div>
+  }else{
+    eventAlert = ""
+  }
+
 
     return(
       <div className="group-view">
@@ -275,7 +284,8 @@ class GroupView extends React.Component {
         <div className = "arrow" onClick = {this.jumpLeft}> ◀︎ </div>
 
         <div className = "events-board">
-          <h3>EVENTS</h3>
+          {eventAlert}
+          <h3>EVENTS </h3> 
           <EventsContainer 
           userName = {this.state.userName} 
           userId = {this.state.userId} 

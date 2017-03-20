@@ -10,7 +10,7 @@ import WeatherHook from "./WeatherHook";
 class EventView extends React.Component{
   constructor(props){
     super(props)
-    this.eventId = this.props.location.query.id;
+    this.eventId = this.props.location.state.id;
     this.deleteEvent = this.deleteEvent.bind(this);
     this.addAttendee = this.addAttendee.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
@@ -59,7 +59,7 @@ class EventView extends React.Component{
   }
 
   parseEvent(){
-    var eventString = this.props.location.query.event;
+    var eventString = this.props.location.state.event;
     var eventObject = JSON.parse(eventString);
     this.setState({event: eventObject});
   }
@@ -84,9 +84,9 @@ class EventView extends React.Component{
     var word = "GET";
     var callback = function(data){
       for(var attendee of data){
-        if(attendee.userName == this.props.location.query.userName){
+        if(attendee.userName == this.props.location.state.userName){
           this.setState({attendees: data, going: true, attendeeId: data[data.length-1].id});
-        } else if (attendee.userName !== this.props.location.query.userName){
+        } else if (attendee.userName !== this.props.location.state.userName){
           this.setState({going: false, attendees: data});
         }
       }
@@ -127,8 +127,8 @@ class EventView extends React.Component{
     const data = {
       attendee:{
         event_id: this.state.event.id,
-        user_id: this.props.location.query.userId,
-        userName: this.props.location.query.userName
+        user_id: this.props.location.state.userId,
+        userName: this.props.location.state.userName
       }
     }
     var dataToSend = JSON.stringify(data);

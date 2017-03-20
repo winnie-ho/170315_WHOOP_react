@@ -32,7 +32,8 @@ class Group extends React.Component{
               "groupId": this.props.groupId,
               "userName": this.props.userName,
               "userId": this.props.userId,
-              "userTime": this.props.userTime
+              "userTime": this.props.userTime,
+              "eventUpdates": this.props.eventUpdates,
             }
           }
         }>{this.props.group.name}
